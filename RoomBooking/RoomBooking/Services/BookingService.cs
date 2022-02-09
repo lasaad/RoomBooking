@@ -12,33 +12,24 @@ namespace RoomBooking.Api.Services
             dataAccess = bookingDataAccess; 
         }
 
-        public int AddBooking(Booking booking)
+        public async Task<int> AddBooking(Booking booking)
         {
-            //Booking booking = new ()
-            //{
-            //    StartSlot = 0,
-            //    EndSlot = 0,
-            //    Date = DateTime.Now,
-            //    RoomId = 1,
-            //    UserId = 1
-            //};
-
-            return dataAccess.AddBooking(booking);
+            return await dataAccess.AddBooking(booking).ConfigureAwait(false);
         }
 
-        public Booking GetBooking(int id)
+        public async Task<Booking> GetBooking(int id)
         {
-            return dataAccess.GetBooking(id);
+            return await dataAccess.GetBooking(id).ConfigureAwait(false);
         }
 
-        public int DeleteBooking(int id)
+        public async Task<int> DeleteBooking(int id)
         {
-            return dataAccess.DeleteBooking(id);
+            return await dataAccess.DeleteBooking(id).ConfigureAwait(false);
         }
 
-        public int EditBooking(Booking booking)
+        public async Task<int> EditBooking(Booking booking)
         {
-            return dataAccess.EditBooking(booking);
+            return await dataAccess.EditBooking(booking).ConfigureAwait(false);
         }
     }
 }

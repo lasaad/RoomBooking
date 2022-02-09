@@ -16,27 +16,27 @@ namespace RoomBooking.Controllers
         }
 
         [HttpGet]
-        public void Get(int id)
+        public async Task<Booking> Get(int id)
         {
-            bookingService.GetBooking(id);
+            return await bookingService.GetBooking(id).ConfigureAwait(false);
         }
 
         [HttpPost]
-        public int AddBooking([FromForm] Booking booking)
+        public async Task<int> AddBooking([FromForm] Booking booking)
         {
-            return bookingService.AddBooking(booking);
+            return await bookingService.AddBooking(booking).ConfigureAwait(false);
         }
 
         [HttpPut]
-        public int EditBooking([FromForm] Booking booking)
+        public async Task<int> EditBooking([FromForm] Booking booking)
         {
-            return bookingService.EditBooking(booking);
+            return await bookingService.EditBooking(booking).ConfigureAwait(false);
         }
 
         [HttpDelete]
-        public int DeleteBooking(int id)
+        public async Task<int> DeleteBooking(int id)
         {
-            return bookingService.DeleteBooking(id);
+            return await bookingService.DeleteBooking(id).ConfigureAwait(false);
         }
     }
 }

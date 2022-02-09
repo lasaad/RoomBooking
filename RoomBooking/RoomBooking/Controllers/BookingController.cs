@@ -15,21 +15,25 @@ namespace RoomBooking.Controllers
             bookingService = service;
         }
 
+        [HttpGet]
         public void Get(int id)
         {
             bookingService.GetBooking(id);
         }
 
+        [HttpPost]
         public int AddBooking([FromForm] Booking booking)
         {
             return bookingService.AddBooking(booking);
         }
 
+        [HttpPut]
         public int EditBooking([FromForm] Booking booking)
         {
             return bookingService.EditBooking(booking);
         }
 
+        [HttpDelete]
         public int DeleteBooking(int id)
         {
             return bookingService.DeleteBooking(id);

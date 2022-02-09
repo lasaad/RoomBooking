@@ -18,9 +18,6 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-//Contexte d'accès la BDD
-string connectionString = "Data Source=localhost\\SQLExpress;Initial Catalog=KataHotel;Integrated Security=True";
-builder.Services.AddDbContext<KataHotelContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString(connectionString)));
 
 //Injection de dépendance
 builder.Services.AddScoped<IBookingService, BookingService>();
@@ -29,6 +26,9 @@ builder.Services.AddScoped<IBookingDataAccess, BookingDataAccess>();
 builder.Services.AddScoped<ITestService, TestService>();
 builder.Services.AddScoped<ITestRepository, TestRepository>();
 
+//Contexte d'accès la BDD
+string connectionString ="";
+builder.Services.AddDbContext<KataHotelContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("Data Source=localhost\\SQLExpress;Initial Catalog=KataHotel;Integrated Security=True;")));
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

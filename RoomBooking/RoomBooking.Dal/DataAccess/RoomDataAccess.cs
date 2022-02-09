@@ -13,9 +13,9 @@ namespace RoomBooking.Dal.DataAccess
     {
         private readonly KataHotelContext _context;
 
-        public RoomDataAccess(/*KataHotelContext context*/)
+        public RoomDataAccess(KataHotelContext context)
         {
-            _context = new KataHotelContext(); 
+            _context = context; 
         }
         
         public Room GetBooking(int id)

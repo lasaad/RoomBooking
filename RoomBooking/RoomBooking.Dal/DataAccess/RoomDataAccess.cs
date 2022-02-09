@@ -1,10 +1,5 @@
-﻿using RoomBooking.Dal.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using RoomBooking.Dal.Interfaces;
+﻿using RoomBooking.Dal.Interfaces;
+using RoomBooking.Dal.Models;
 using System.Data.Entity;
 
 namespace RoomBooking.Dal.DataAccess
@@ -18,7 +13,7 @@ namespace RoomBooking.Dal.DataAccess
             _context = context; 
         }
         
-        public async Task<Room> GetBooking(int id)
+        public async Task<Room> GetRoom(int id)
         {
             return await _context.Rooms.Where(b => b.Id == id).FirstOrDefaultAsync().ConfigureAwait(false);
         }

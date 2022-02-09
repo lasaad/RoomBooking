@@ -1,5 +1,6 @@
 ﻿using RoomBooking.Api.Services.Interface;
 using RoomBooking.Dal.Interfaces;
+using RoomBooking.Dal.Models;
 
 namespace RoomBooking.Api.Services
 {
@@ -11,9 +12,9 @@ namespace RoomBooking.Api.Services
             dataAccess = bookingDataAccess;
         }
 
-        public async Task<int> AddRoom(Room booking)
+        public async Task<int> AddRoom(Room room)
         {
-            return await dataAccess.AddRoom(booking).ConfigureAwait(false);
+            return await dataAccess.AddRoom(room).ConfigureAwait(false);
         }
 
         public async Task<Room> GetRoom(int id)

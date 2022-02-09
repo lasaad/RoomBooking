@@ -1,12 +1,11 @@
-﻿using RoomBooking.Dal.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using RoomBooking.Dal.Interfaces;
 using System.Data.Entity;
-
+using RoomBooking.Dal.Models;
 
 namespace RoomBooking.Dal.DataAccess
 {
@@ -44,7 +43,7 @@ namespace RoomBooking.Dal.DataAccess
             Booking bookingToDelete = await _context.Bookings.Where(b => b.Id == id).FirstOrDefaultAsync().ConfigureAwait(false);
 
             if (bookingToDelete != null)
-                await _context.Bookings.Remove(bookingToDelete);
+                _context.Bookings.Remove(bookingToDelete);
 
             return _context.SaveChanges();
         }

@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using RoomBooking.Api.Services;
 using RoomBooking.Api.Services.Interface;
 using RoomBooking.Dal.Models;
 
@@ -16,27 +17,35 @@ namespace RoomBooking.Controllers
         }
 
         [HttpGet]
-        public async Task<Room> Get(int id)
+        public async Task<IActionResult> Get(int id)
         {
-            return await roomService.GetRoom(id).ConfigureAwait(false);
+            Room result = await roomService.GetRoom(id).ConfigureAwait(false);
+
+            return Ok(result);
         }
 
         [HttpPost]
-        public async Task<int> AddRoom([FromForm] Room room)
+        public async Task<IActionResult> AddRoom([FromForm] Room room)
         {
-            return await roomService.AddRoom(room).ConfigureAwait(false);
+            int result = await roomService.AddRoom(room).ConfigureAwait(false);
+
+            return Ok(result);
         }
 
         [HttpPut]
-        public async Task<int> EditRoom([FromForm] Room room)
+        public async Task<IActionResult> EditRoom([FromForm] Room room)
         {
-            return await roomService.EditRoom(room).ConfigureAwait(false);
+            int result = await roomService.EditRoom(room).ConfigureAwait(false);
+
+            return Ok(result);
         }
 
         [HttpDelete]
-        public async Task<int> DeleteRoom(int id)
+        public async Task<IActionResult> DeleteRoom(int id)
         {
-            return await roomService.DeleteRoom(id).ConfigureAwait(false);
+            int result = await roomService.DeleteRoom(id).ConfigureAwait(false);
+
+            return Ok(result);
         }
     }
 }

@@ -16,27 +16,37 @@ namespace RoomRoom.Controllers
         }
 
         [HttpGet]
-        public async Task<User> Get(int id)
+        public async Task<IActionResult> Get(int id)
         {
-            return await userService.GetUser(id).ConfigureAwait(false);
+            User result = await userService.GetUser(id).ConfigureAwait(false);
+
+            return Ok(result);
         }
 
         [HttpPost]
-        public async Task<int> AddUser([FromForm] User user)
+        public async Task<IActionResult> AddUser([FromForm] User user)
         {
-            return await userService.AddUser(user).ConfigureAwait(false);
+            int result = await userService.AddUser(user).ConfigureAwait(false);
+
+            return Ok(result);
+
         }
 
         [HttpPut]
-        public async Task<int> EditUser([FromForm] User user)
+        public async Task<IActionResult> EditUser([FromForm] User user)
         {
-            return await userService.EditUser(user).ConfigureAwait(false);
+            int result = await userService.EditUser(user).ConfigureAwait(false);
+
+            return Ok(result);
+
         }
 
         [HttpDelete]
-        public async Task<int> DeleteUser(int id)
+        public async Task<IActionResult> DeleteUser(int id)
         {
-            return await userService.DeleteUser(id).ConfigureAwait(false);
+            int result = await userService.DeleteUser(id);
+
+            return Ok(result);
         }
     }
 }

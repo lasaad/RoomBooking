@@ -43,7 +43,10 @@
   <ItemGroup>
     <Compile Include="Interfaces\Repositories\ITestRepository.cs" />
     <Compile Include="Interfaces\Services\ITestService.cs" />
+    <Compile Include="Models\Booking.cs" />
+    <Compile Include="Models\Room.cs" />
     <Compile Include="Models\Test.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\TestService.cs" />
   </ItemGroup>

@@ -13,12 +13,12 @@ namespace UserBooking.Dal.DataAccess
     {
         private readonly KataHotelContext _context;
 
-        public UserDataAccess(/*KataHotelContext context*/)
+        public UserDataAccess()
         {
             _context = new KataHotelContext(); 
         }
         
-        public async Task<User> GetBooking(int id)
+        public async Task<User> GetUser(int id)
         {
             return await _context.Users.Where(b => b.Id == id).FirstOrDefaultAsync().ConfigureAwait(false);
         }

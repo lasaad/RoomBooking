@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using RoomBooking.Dal.Interfaces;
+using System.Data.Entity;
 
 
 namespace RoomBooking.Dal.DataAccess
@@ -18,32 +19,32 @@ namespace RoomBooking.Dal.DataAccess
             _context = context; 
         }
         
-        public Booking GetBooking(int id)
+        public async Task<Booking> GetBooking(int id)
         {
-            return _context.Bookings.Where(b => b.Id == id).FirstOrDefault();
+            return  await _context.Bookings.Where(b => b.Id == id).FirstOrDefaultAsync().ConfigureAwait(false);
         }
 
-        public int AddBooking(Booking booking)
+        public async Task<int> AddBooking(Booking booking)
         {
-            _context.Bookings.Add(booking);
+            await _context.Bookings.AddAsync(booking).ConfigureAwait(false);
             return _context.SaveChanges();
         }
 
-        public int EditBooking(Booking booking)
+        public async Task<int> EditBooking(Booking booking)
         {
-            Booking bookingToEdit = _context.Bookings.Where(b => b.Id == booking.Id).FirstOrDefault();
+            Booking bookingToEdit = await _context.Bookings.Where(b => b.Id == booking.Id).FirstOrDefaultAsync().ConfigureAwait(false);
             if (bookingToEdit != null)
                 bookingToEdit = booking;
 
             return _context.SaveChanges();
         }
 
-        public int DeleteBooking(int id)
+        public async Task<int> DeleteBooking(int id)
         {
-            Booking bookingToDelete = _context.Bookings.Where(b => b.Id == id).FirstOrDefault();
+            Booking bookingToDelete = await _context.Bookings.Where(b => b.Id == id).FirstOrDefaultAsync().ConfigureAwait(false);
 
             if (bookingToDelete != null)
-                _context.Bookings.Remove(bookingToDelete);
+                await _context.Bookings.Remove(bookingToDelete);
 
             return _context.SaveChanges();
         }

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using RoomBooking.Dal.Interfaces;
-
+using System.Data.Entity;
 
 namespace UserBooking.Dal.DataAccess
 {
@@ -18,29 +18,29 @@ namespace UserBooking.Dal.DataAccess
             _context = new KataHotelContext(); 
         }
         
-        public User GetBooking(int id)
+        public async Task<User> GetBooking(int id)
         {
-            return _context.Users.Where(b => b.Id == id).FirstOrDefault();
+            return await _context.Users.Where(b => b.Id == id).FirstOrDefaultAsync().ConfigureAwait(false);
         }
 
-        public int AddUser(User user)
+        public async Task<int> AddUser(User user)
         {
-            _context.Users.Add(user);
+            await _context.Users.AddAsync(user).ConfigureAwait(false);
             return _context.SaveChanges();
         }
 
-        public int EditUser(User user)
+        public async Task<int> EditUser(User user)
         {
-            User UserToEdit = _context.Users.Where(b => b.Id == user.Id).FirstOrDefault();
+            User UserToEdit = await _context.Users.Where(b => b.Id == user.Id).FirstOrDefaultAsync().ConfigureAwait(false);
             if (UserToEdit != null)
                 UserToEdit = user;
 
             return _context.SaveChanges();
         }
 
-        public int DeleteUser(int id)
+        public async Task<int> DeleteUser(int id)
         {
-            User UserToDelete = _context.Users.Where(b => b.Id == id).FirstOrDefault();
+            User UserToDelete = await _context.Users.Where(b => b.Id == id).FirstOrDefaultAsync().ConfigureAwait(false);
 
             if (UserToDelete != null)
                 _context.Users.Remove(UserToDelete);

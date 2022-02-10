@@ -1,6 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
+using RoomBooking.Api.Dtos.Responses;
 using RoomBooking.Api.Services.Interface;
 using RoomBooking.Dal.Models;
+using Swashbuckle.AspNetCore.Annotations;
+using System.Net;
 
 namespace RoomRoom.Controllers
 {
@@ -13,9 +16,10 @@ namespace RoomRoom.Controllers
         public UserController(IUserService service)
         {
             userService = service;
-        }
+        } 
 
         [HttpGet]
+        [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(GetUsersResponse))]
         public async Task<IActionResult> Get(int id)
         {
             User result = await userService.GetUser(id).ConfigureAwait(false);
@@ -24,6 +28,8 @@ namespace RoomRoom.Controllers
         }
 
         [HttpGet]
+        [Route("/All")]
+        [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(GetUsersResponse))]
         public async Task<IActionResult> Get()
         {
             List<User> result = await userService.GetUsers().ConfigureAwait(false);
@@ -32,6 +38,7 @@ namespace RoomRoom.Controllers
         }
 
         [HttpPost]
+        [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(GetUsersResponse))]
         public async Task<IActionResult> AddUser([FromForm] User user)
         {
             int result = await userService.AddUser(user).ConfigureAwait(false);
@@ -41,6 +48,7 @@ namespace RoomRoom.Controllers
         }
 
         [HttpPut]
+        [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(GetUsersResponse))]
         public async Task<IActionResult> EditUser([FromForm] User user)
         {
             int result = await userService.EditUser(user).ConfigureAwait(false);
@@ -50,6 +58,7 @@ namespace RoomRoom.Controllers
         }
 
         [HttpDelete]
+        [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(GetUsersResponse))]
         public async Task<IActionResult> DeleteUser(int id)
         {
             int result = await userService.DeleteUser(id);

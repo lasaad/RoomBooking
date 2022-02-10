@@ -7,6 +7,7 @@ namespace RoomBooking.Api.Services.Interface
         public Task<int> AddBooking(Booking booking);
 
         public Task<Booking> GetBooking(int id);
+        public Task<List<Booking>> GetBookings();
 
         public Task<int> DeleteBooking(int id);
 

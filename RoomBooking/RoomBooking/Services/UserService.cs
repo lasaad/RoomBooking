@@ -1,7 +1,8 @@
 ﻿using RoomBooking.Api.Services.Interface;
 using RoomBooking.Dal.Interfaces;
 using RoomBooking.Dal.Models;
-namespace UserBooking.Api.Services
+
+namespace RoomBooking.Api.Services
 {
     public class UserService : IUserService
     {

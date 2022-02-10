@@ -6,8 +6,8 @@ using RoomBooking.Api.Services.Interface;
 using RoomBooking.Dal.Interfaces;
 using RoomBooking.Dal.Models;
 using RoomBooking.Domain.Services;
-using UserBooking.Api.Services;
-using TestModel = RoomBooking.Domain.Models.Test;
+using UserDto = RoomBooking.Dal.Models.User;
+using UserService = RoomBooking.Api.Services.UserService;
 
 namespace RoomBooking.Test.Domain
 {

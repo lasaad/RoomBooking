@@ -21,6 +21,11 @@ namespace RoomBooking.Api.Services
         {
             return await dataAccess.GetRoom(id).ConfigureAwait(false);
         }
+        
+        public async Task<List<Room>> GetRooms()
+        {
+            return await dataAccess.GetRooms().ConfigureAwait(false);
+        }
 
         public async Task<int> DeleteRoom(int id)
         {

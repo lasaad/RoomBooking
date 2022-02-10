@@ -1,6 +1,7 @@
 ﻿using RoomBooking.Dal.Models;
 using RoomBooking.Domain.Models;
 using System.Threading.Tasks;
+using User = RoomBooking.Dal.Models.User;
 
 namespace RoomBooking.Dal.Interfaces
 {

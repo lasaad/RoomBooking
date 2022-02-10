@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using RoomBooking.Dal.Interfaces;
 using System.Data.Entity;
 
-namespace UserBooking.Dal.DataAccess
+namespace RoomBooking.Dal.DataAccess
 {
     public class UserDataAccess : IUserDataAccess
     {

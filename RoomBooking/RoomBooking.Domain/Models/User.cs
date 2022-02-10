@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace RoomBooking.Domain.Models
 {
-    public class UserDom        
+    public class User        
     {
-        public UserDom()
+        public User()
         {
 
         }

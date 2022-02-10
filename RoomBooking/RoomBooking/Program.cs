@@ -1,13 +1,9 @@
-using RoomBooking.Api.Services;
 using RoomBooking.Api.Services.Interface;
+using RoomBooking.Api.Services;
+using Microsoft.EntityFrameworkCore;
+using KataHotelContext = RoomBooking.Dal.Models.KataHotelContext;
 using RoomBooking.Dal.Interfaces;
 using RoomBooking.Dal.DataAccess;
-using RoomBooking.Dal.Models;
-using Microsoft.EntityFrameworkCore;
-using RoomBooking.Domain.Interfaces.Services;
-using RoomBooking.Domain.Services;
-using RoomBooking.Dal.Repositories;
-using RoomBooking.Domain.Interfaces.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,16 +16,28 @@ builder.Services.AddSwaggerGen();
 
 
 //Injection de dépendance
+
+//Booking
 builder.Services.AddScoped<IBookingService, BookingService>();
 builder.Services.AddScoped<IBookingDataAccess, BookingDataAccess>();
 
-builder.Services.AddScoped<ITestService, TestService>();
-builder.Services.AddScoped<ITestRepository, TestRepository>();
+//Test
+//builder.Services.AddScoped<ITestService, TestService>();
+//builder.Services.AddScoped<ITestRepository, TestRepository>();
+
+//Room
+builder.Services.AddScoped<IRoomService, RoomService>();
+builder.Services.AddScoped<IRoomDataAccess, RoomDataAccess>();
+
+//User
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IUserDataAccess, UserDataAccess>();
 
 //Contexte d'accès la BDD
-string connectionString ="";
-builder.Services.AddDbContext<KataHotelContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("Data Source=localhost\\SQLExpress;Initial Catalog=KataHotel;Integrated Security=True;")));
+
+builder.Services.AddDbContext<KataHotelContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("Data Source=localhost\\SQLExpress;Initial Catalog=KataHotel;Integrated Security=True")));
 var app = builder.Build();
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

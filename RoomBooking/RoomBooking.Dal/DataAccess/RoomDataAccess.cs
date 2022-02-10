@@ -17,6 +17,11 @@ namespace RoomBooking.Dal.DataAccess
         {
             return await _context.Rooms.Where(b => b.Id == id).FirstOrDefaultAsync().ConfigureAwait(false);
         }
+        
+        public async Task<List<Room>> GetRooms()
+        {
+            return await _context.Rooms.ToListAsync().ConfigureAwait(false);
+        }
 
         public async Task<int> AddRoom(Room room)
         {

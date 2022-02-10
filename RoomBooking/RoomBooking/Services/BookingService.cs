@@ -14,12 +14,19 @@ namespace RoomBooking.Api.Services
 
         public async Task<int> AddBooking(Booking booking)
         {
+            //var bookingExisted = dataAccess.()
+
             return await dataAccess.AddBooking(booking).ConfigureAwait(false);
         }
 
         public async Task<Booking> GetBooking(int id)
         {
             return await dataAccess.GetBooking(id).ConfigureAwait(false);
+        }
+
+        public async Task<List<Booking>> GetBookings()
+        {
+            return await dataAccess.GetBookings().ConfigureAwait(false);
         }
 
         public async Task<int> DeleteBooking(int id)

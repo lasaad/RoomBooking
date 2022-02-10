@@ -8,6 +8,7 @@ using RoomBooking.Api.Services.Interface;
 using RoomBooking.Dal.Models;
 using RoomBooking.Domain.Interfaces.Services;
 using RoomRoom.Controllers;
+using IUserService = RoomBooking.Api.Services.Interface.IUserService;
 
 namespace RoomBooking.Test.Api
 {

@@ -23,6 +23,14 @@ namespace RoomRoom.Controllers
             return Ok(result);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Get()
+        {
+            List<User> result = await userService.GetUsers().ConfigureAwait(false);
+
+            return Ok(result);
+        }
+
         [HttpPost]
         public async Task<IActionResult> AddUser([FromForm] User user)
         {

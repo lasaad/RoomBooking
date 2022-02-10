@@ -13,5 +13,7 @@ namespace RoomBooking.Dal.Interfaces
         Task<int> DeleteUser(int id);
 
         Task<User> GetUser(int id);
+
+        Task<List<User>> GetUsers();
     }
 }

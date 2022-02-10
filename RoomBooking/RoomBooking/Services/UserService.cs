@@ -31,5 +31,10 @@ namespace UserBooking.Api.Services
             return await dataAccess.EditUser(booking).ConfigureAwait(false);
         }
 
+        public async Task<List<User>> GetUsers()
+        {
+            return await dataAccess.GetUsers().ConfigureAwait(false);
+        }
+
     }
 }

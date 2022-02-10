@@ -47,5 +47,10 @@ namespace UserBooking.Dal.DataAccess
 
             return _context.SaveChanges();
         }
+
+        public Task<List<User>> GetUsers()
+        {
+            return _context.Users.ToListAsync();
+        }
     }
 }

@@ -1,8 +1,11 @@
 
 using Microsoft.AspNetCore.Mvc;
+using RoomBooking.Api.Dtos.Responses;
 using RoomBooking.Api.Services;
 using RoomBooking.Api.Services.Interface;
 using RoomBooking.Dal.Models;
+using Swashbuckle.AspNetCore.Annotations;
+using System.Net;
 
 namespace RoomBooking.Controllers
 {
@@ -18,6 +21,7 @@ namespace RoomBooking.Controllers
         }
 
         [HttpGet]
+        [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(GetBookingsResponse))]
         public async Task<IActionResult> Get(int id)
         {
             Booking result = await bookingService.GetBooking(id).ConfigureAwait(false);
@@ -26,6 +30,7 @@ namespace RoomBooking.Controllers
         }
 
         [HttpPost]
+        [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(GetBookingsResponse))]
         public async Task<IActionResult> AddBooking([FromForm] Booking booking)
         {
             int result = await bookingService.AddBooking(booking).ConfigureAwait(false);
@@ -34,6 +39,7 @@ namespace RoomBooking.Controllers
         }
 
         [HttpPut]
+        [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(GetBookingsResponse))]
         public async Task<IActionResult> EditBooking([FromForm] Booking booking)
         {
             int result = await bookingService.EditBooking(booking).ConfigureAwait(false);
@@ -42,6 +48,7 @@ namespace RoomBooking.Controllers
         }
 
         [HttpDelete]
+        [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(GetBookingsResponse))]
         public async Task<IActionResult> DeleteBooking(int id)
         {
             int result = await bookingService.DeleteBooking(id).ConfigureAwait(false);

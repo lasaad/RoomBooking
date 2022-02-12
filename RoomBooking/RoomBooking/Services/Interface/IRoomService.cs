@@ -4,10 +4,10 @@ namespace RoomBooking.Api.Services.Interface
 {
     public interface IRoomService
     {
-        public Task<int> AddRoom(Room booking);
-        public Task<Room> GetRoom(int id);
-        public Task<List<Room>> GetRooms();
+        public Task<int> AddRoom(RoomEntity booking);
+        public Task<RoomEntity> GetRoom(int id);
+        public Task<List<RoomEntity>> GetRooms();
         public Task<int> DeleteRoom(int id);
-        public Task<int> EditRoom(Room booking);
+        public Task<int> EditRoom(RoomEntity booking);
     }
 }

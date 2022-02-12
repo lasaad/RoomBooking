@@ -1,6 +1,6 @@
 ﻿namespace RoomBooking.Domain.Models
 {
-    public class Test
+    public class Value
     {
         public int Id { get; set; }
         public string Name { get; set; }

@@ -4,13 +4,13 @@ namespace RoomBooking.Api.Services.Interface
 {
     public interface IBookingService
     {
-        public Task<int> AddBooking(Booking booking);
+        public Task<int> AddBooking(BookingEntity booking);
 
-        public Task<Booking> GetBooking(int id);
-        public Task<List<Booking>> GetBookings();
+        public Task<BookingEntity> GetBooking(int id);
+        public Task<List<BookingEntity>> GetBookings();
 
         public Task<int> DeleteBooking(int id);
 
-        public Task<int> EditBooking(Booking booking);
+        public Task<int> EditBooking(BookingEntity booking);
     }
 }

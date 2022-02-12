@@ -20,9 +20,9 @@ namespace RoomBooking.Test.Api
         public async Task Should_Get_Rooms()
         {
             IRoomService roomService = Substitute.For<IRoomService>();
-            roomService.GetRooms().Returns(new List<Room>
+            roomService.GetRooms().Returns(new List<RoomEntity>
             {
-                new Room()
+                new RoomEntity()
             });
 
             RoomController controller = new RoomController(roomService);
@@ -36,7 +36,7 @@ namespace RoomBooking.Test.Api
         public async Task Should_Get_Room()
         {
             IRoomService roomService = Substitute.For<IRoomService>();
-            roomService.GetRoom(0).Returns(new Room());
+            roomService.GetRoom(0).Returns(new RoomEntity());
 
             RoomController controller = new RoomController(roomService);
             IActionResult response = await controller.Get(0);
@@ -49,10 +49,10 @@ namespace RoomBooking.Test.Api
         public async Task Should_Edit_Room()
         {
             IRoomService roomService = Substitute.For<IRoomService>();
-            roomService.GetRoom(0).Returns(new Room());
+            roomService.GetRoom(0).Returns(new RoomEntity());
 
             RoomController controller = new RoomController(roomService);
-            IActionResult response = await controller.EditRoom(new Room());
+            IActionResult response = await controller.EditRoom(new RoomEntity());
 
             Assert.IsNotNull(response);
             Assert.IsInstanceOfType(response, typeof(OkObjectResult));
@@ -62,10 +62,10 @@ namespace RoomBooking.Test.Api
         public async Task Should_Create_Room()
         {
             IRoomService roomService = Substitute.For<IRoomService>();
-            roomService.GetRoom(0).Returns(new Room());
+            roomService.GetRoom(0).Returns(new RoomEntity());
 
             RoomController controller = new RoomController(roomService);
-            IActionResult response = await controller.AddRoom(new Room());
+            IActionResult response = await controller.AddRoom(new RoomEntity());
 
             Assert.IsNotNull(response);
             Assert.IsInstanceOfType(response, typeof(OkObjectResult));
@@ -75,7 +75,7 @@ namespace RoomBooking.Test.Api
         public async Task Should_Delete_Room()
         {
             IRoomService roomService = Substitute.For<IRoomService>();
-            roomService.GetRoom(0).Returns(new Room());
+            roomService.GetRoom(0).Returns(new RoomEntity());
 
             RoomController controller = new RoomController(roomService);
             IActionResult response = await controller.DeleteRoom(0);

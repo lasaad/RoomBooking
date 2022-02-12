@@ -2,11 +2,8 @@
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NSubstitute;
-using RoomBooking.Api.Services.Interface;
 using RoomBooking.Dal.Interfaces;
 using RoomBooking.Dal.Models;
-using RoomBooking.Domain.Services;
-using UserDto = RoomBooking.Dal.Models.User;
 using UserService = RoomBooking.Api.Services.UserService;
 
 namespace RoomBooking.Test.Domain
@@ -18,7 +15,7 @@ namespace RoomBooking.Test.Domain
         public async Task Should_Get_Users()
         {
             var userRepository = Substitute.For<IUserDataAccess>();
-            userRepository.GetUsers().Returns(new List<User> { new User()});
+            userRepository.GetUsers().Returns(new List<UserEntity> { new UserEntity()});
 
             var service = new UserService(userRepository);
             var result = await service.GetUsers();
@@ -30,7 +27,7 @@ namespace RoomBooking.Test.Domain
         public async Task Should_Get_User()
         {
             var userRepository = Substitute.For<IUserDataAccess>();
-            userRepository.GetUser(0).Returns(new User());
+            userRepository.GetUser(0).Returns(new UserEntity());
 
             var service = new UserService(userRepository);
             var result = await service.GetUser(0);
@@ -42,10 +39,10 @@ namespace RoomBooking.Test.Domain
         public async Task Should_Edit_User()
         {
             var userRepository = Substitute.For<IUserDataAccess>();
-            userRepository.EditUser(new User()).Returns(1);
+            userRepository.EditUser(new UserEntity()).Returns(1);
 
             var service = new UserService(userRepository);
-            var result = await service.EditUser(new User());
+            var result = await service.EditUser(new UserEntity());
 
             Assert.Equals(result, 1);
         }
@@ -54,10 +51,10 @@ namespace RoomBooking.Test.Domain
         public async Task Should_Create_User()
         {
             var userRepository = Substitute.For<IUserDataAccess>();
-            userRepository.AddUser(new User()).Returns(1);
+            userRepository.AddUser(new UserEntity()).Returns(1);
 
             var service = new UserService(userRepository);
-            var result = await service.AddUser(new User());
+            var result = await service.AddUser(new UserEntity());
 
             Assert.Equals(result, 1);
         }

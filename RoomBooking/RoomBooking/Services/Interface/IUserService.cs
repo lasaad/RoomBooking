@@ -4,10 +4,10 @@ namespace RoomBooking.Api.Services.Interface
 {
     public interface IUserService
     {
-        public Task<int> AddUser(User booking);
-        public Task<User> GetUser(int id);
+        public Task<int> AddUser(UserEntity booking);
+        public Task<UserEntity> GetUser(int id);
         public Task<int> DeleteUser(int id);
-        public Task<int> EditUser(User booking);
-        public Task<List<User>> GetUsers();
+        public Task<int> EditUser(UserEntity booking);
+        public Task<List<UserEntity>> GetUsers();
     }
 }

@@ -19,9 +19,9 @@ namespace RoomBooking.Test.Api
         public async Task Should_Get_Users()
         {
             IUserService userService = Substitute.For<IUserService>();
-            userService.GetUsers().Returns(new List<User>
+            userService.GetUsers().Returns(new List<UserEntity>
             {
-                new User()
+                new UserEntity()
             });
 
             UserController controller = new UserController(userService);
@@ -35,7 +35,7 @@ namespace RoomBooking.Test.Api
         public async Task Should_Get_User()
         {
             IUserService userService = Substitute.For<IUserService>();
-            userService.GetUser(0).Returns(new User());
+            userService.GetUser(0).Returns(new UserEntity());
 
             UserController controller = new UserController(userService);
             IActionResult response = await controller.Get(0);
@@ -48,10 +48,10 @@ namespace RoomBooking.Test.Api
         public async Task Should_Edit_User()
         {
             IUserService userService = Substitute.For<IUserService>();
-            userService.GetUser(0).Returns(new User());
+            userService.GetUser(0).Returns(new UserEntity());
 
             UserController controller = new UserController(userService);
-            IActionResult response = await controller.EditUser(new User());
+            IActionResult response = await controller.EditUser(new UserEntity());
 
             Assert.IsNotNull(response);
             Assert.IsInstanceOfType(response, typeof(OkObjectResult));
@@ -61,10 +61,10 @@ namespace RoomBooking.Test.Api
         public async Task Should_Create_User()
         {
             IUserService userService = Substitute.For<IUserService>();
-            userService.GetUser(0).Returns(new User());
+            userService.GetUser(0).Returns(new UserEntity());
 
             UserController controller = new UserController(userService);
-            IActionResult response = await controller.AddUser(new User());
+            IActionResult response = await controller.AddUser(new UserEntity());
 
             Assert.IsNotNull(response);
             Assert.IsInstanceOfType(response, typeof(OkObjectResult));
@@ -74,7 +74,7 @@ namespace RoomBooking.Test.Api
         public async Task Should_Delete_User()
         {
             IUserService userService = Substitute.For<IUserService>();
-            userService.GetUser(0).Returns(new User());
+            userService.GetUser(0).Returns(new UserEntity());
 
             UserController controller = new UserController(userService);
             IActionResult response = await controller.DeleteUser(0);

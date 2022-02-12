@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace RoomBooking.Dal.Models
 {
-    public partial class Booking
+    public partial class BookingEntity
     {
         public int Id { get; set; }
         public int RoomId { get; set; }
@@ -12,7 +12,7 @@ namespace RoomBooking.Dal.Models
         public int StartSlot { get; set; }
         public int EndSlot { get; set; }
 
-        public virtual Room Room { get; set; } = null!;
-        public virtual User User { get; set; } = null!;
+        public virtual RoomEntity Room { get; set; } = null!;
+        public virtual UserEntity User { get; set; } = null!;
     }
 }

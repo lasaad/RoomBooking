@@ -3,17 +3,17 @@ using System.Collections.Generic;
 
 namespace RoomBooking.Dal.Models
 {
-    public partial class User
+    public partial class UserEntity
     {
-        public User()
+        public UserEntity()
         {
-            Bookings = new HashSet<Booking>();
+            Bookings = new HashSet<BookingEntity>();
         }
 
         public int Id { get; set; }
         public string FirstName { get; set; } = null!;
         public string LastName { get; set; } = null!;
 
-        public virtual ICollection<Booking> Bookings { get; set; }
+        public virtual ICollection<BookingEntity> Bookings { get; set; }
     }
 }

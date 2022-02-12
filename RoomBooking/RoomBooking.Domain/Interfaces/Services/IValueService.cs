@@ -4,8 +4,8 @@ using RoomBooking.Domain.Models;
 
 namespace RoomBooking.Domain.Interfaces.Services
 {
-    public interface ITestService
+    public interface IValueService
     {
-        Task<IEnumerable<Test>> GetTestsAsync();
+        Task<IEnumerable<Value>> GetValuesAsync();
     }
 }

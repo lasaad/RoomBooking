@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using KataHotelContext = RoomBooking.Dal.Models.KataHotelContext;
 using RoomBooking.Dal.Interfaces;
 using RoomBooking.Dal.DataAccess;
+using RoomBooking.Dal;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,9 +22,9 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IBookingService, BookingService>();
 builder.Services.AddScoped<IBookingDataAccess, BookingDataAccess>();
 
-//Test
-//builder.Services.AddScoped<ITestService, TestService>();
-//builder.Services.AddScoped<ITestRepository, TestRepository>();
+//Value
+builder.Services.AddScoped<RoomBooking.Domain.Interfaces.Services.IValueService, RoomBooking.Domain.Services.ValueService>();
+builder.Services.AddScoped<RoomBooking.Domain.Interfaces.Repositories.IValueRepository, RoomBooking.Dal.Repositories.ValueRepository>();
 
 //Room
 builder.Services.AddScoped<IRoomService, RoomService>();
@@ -35,7 +36,7 @@ builder.Services.AddScoped<IUserDataAccess, UserDataAccess>();
 
 //Contexte d'accès la BDD
 
-builder.Services.AddDbContext<KataHotelContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("Data Source=localhost\\SQLExpress;Initial Catalog=KataHotel;Integrated Security=True")));
+builder.Services.AddDbContext<KataHotelContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("RoomDatabase")));
 var app = builder.Build();
 
 

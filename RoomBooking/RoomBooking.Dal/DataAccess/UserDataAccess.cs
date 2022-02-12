@@ -1,11 +1,6 @@
-﻿using RoomBooking.Dal.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.EntityFrameworkCore;
 using RoomBooking.Dal.Interfaces;
-using System.Data.Entity;
+using RoomBooking.Dal.Models;
 
 namespace RoomBooking.Dal.DataAccess
 {
@@ -18,20 +13,20 @@ namespace RoomBooking.Dal.DataAccess
             _context = new KataHotelContext(); 
         }
         
-        public async Task<User> GetUser(int id)
+        public async Task<UserEntity> GetUser(int id)
         {
             return await _context.Users.Where(b => b.Id == id).FirstOrDefaultAsync().ConfigureAwait(false);
         }
 
-        public async Task<int> AddUser(User user)
+        public async Task<int> AddUser(UserEntity user)
         {
             await _context.Users.AddAsync(user).ConfigureAwait(false);
             return _context.SaveChanges();
         }
 
-        public async Task<int> EditUser(User user)
+        public async Task<int> EditUser(UserEntity user)
         {
-            User UserToEdit = await _context.Users.Where(b => b.Id == user.Id).FirstOrDefaultAsync().ConfigureAwait(false);
+            UserEntity UserToEdit = await _context.Users.Where(b => b.Id == user.Id).FirstOrDefaultAsync().ConfigureAwait(false);
             if (UserToEdit != null)
                 UserToEdit = user;
 
@@ -40,7 +35,7 @@ namespace RoomBooking.Dal.DataAccess
 
         public async Task<int> DeleteUser(int id)
         {
-            User UserToDelete = await _context.Users.Where(b => b.Id == id).FirstOrDefaultAsync().ConfigureAwait(false);
+            UserEntity UserToDelete = await _context.Users.Where(b => b.Id == id).FirstOrDefaultAsync().ConfigureAwait(false);
 
             if (UserToDelete != null)
                 _context.Users.Remove(UserToDelete);
@@ -48,7 +43,7 @@ namespace RoomBooking.Dal.DataAccess
             return _context.SaveChanges();
         }
 
-        public Task<List<User>> GetUsers()
+        public Task<List<UserEntity>> GetUsers()
         {
             return _context.Users.ToListAsync();
         }

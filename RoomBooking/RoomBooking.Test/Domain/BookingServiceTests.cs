@@ -2,13 +2,9 @@
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NSubstitute;
-using RoomBooking.Api.Services.Interface;
 using RoomBooking.Dal.Interfaces;
 using RoomBooking.Dal.Models;
-using RoomBooking.Domain.Services;
-using Booking = RoomBooking.Dal.Models.Booking;
 using BookingService = RoomBooking.Api.Services.BookingService;
-using RoomBooking.Api.Services;
 
 namespace RoomBooking.Test.Domain
 {
@@ -19,7 +15,7 @@ namespace RoomBooking.Test.Domain
         public async Task Should_Get_Bookings()
         {
             var bookingRepository = Substitute.For<IBookingDataAccess>();
-            bookingRepository.GetBookings().Returns(new List<Booking> { new Booking()});
+            bookingRepository.GetBookings().Returns(new List<BookingEntity> { new BookingEntity()});
 
             var service = new BookingService(bookingRepository);
             var result = await service.GetBookings();
@@ -31,7 +27,7 @@ namespace RoomBooking.Test.Domain
         public async Task Should_Get_Booking()
         {
             var bookingRepository = Substitute.For<IBookingDataAccess>();
-            bookingRepository.GetBooking(0).Returns(new Booking());
+            bookingRepository.GetBooking(0).Returns(new BookingEntity());
 
             var service = new BookingService(bookingRepository);
             var result = await service.GetBooking(0);
@@ -43,10 +39,10 @@ namespace RoomBooking.Test.Domain
         public async Task Should_Edit_Booking()
         {
             var bookingRepository = Substitute.For<IBookingDataAccess>();
-            bookingRepository.EditBooking(new Booking()).Returns(1);
+            bookingRepository.EditBooking(new BookingEntity()).Returns(1);
 
             var service = new BookingService(bookingRepository);
-            var result = await service.EditBooking(new Booking());
+            var result = await service.EditBooking(new BookingEntity());
 
             Assert.Equals(result, 1);
         }
@@ -55,10 +51,10 @@ namespace RoomBooking.Test.Domain
         public async Task Should_Create_Booking()
         {
             var bookingRepository = Substitute.For<IBookingDataAccess>();
-            bookingRepository.AddBooking(new Booking()).Returns(1);
+            bookingRepository.AddBooking(new BookingEntity()).Returns(1);
 
             var service = new BookingService(bookingRepository);
-            var result = await service.AddBooking(new Booking());
+            var result = await service.AddBooking(new BookingEntity());
 
             Assert.Equals(result, 1);
         }

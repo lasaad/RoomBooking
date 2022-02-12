@@ -12,17 +12,17 @@ namespace RoomBooking.Api.Services
             dataAccess = bookingDataAccess;
         }
 
-        public async Task<int> AddRoom(Room room)
+        public async Task<int> AddRoom(RoomEntity room)
         {
             return await dataAccess.AddRoom(room).ConfigureAwait(false);
         }
 
-        public async Task<Room> GetRoom(int id)
+        public async Task<RoomEntity> GetRoom(int id)
         {
             return await dataAccess.GetRoom(id).ConfigureAwait(false);
         }
         
-        public async Task<List<Room>> GetRooms()
+        public async Task<List<RoomEntity>> GetRooms()
         {
             return await dataAccess.GetRooms().ConfigureAwait(false);
         }
@@ -32,7 +32,7 @@ namespace RoomBooking.Api.Services
             return await dataAccess.DeleteRoom(id).ConfigureAwait(false);
         }
 
-        public async Task<int> EditRoom(Room booking)
+        public async Task<int> EditRoom(RoomEntity booking)
         {
             return await dataAccess.EditRoom(booking).ConfigureAwait(false);
         }

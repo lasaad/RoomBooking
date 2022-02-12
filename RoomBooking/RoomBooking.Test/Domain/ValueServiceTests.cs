@@ -3,25 +3,25 @@ using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NSubstitute;
 using RoomBooking.Domain.Interfaces.Repositories;
+using RoomBooking.Domain.Models;
 using RoomBooking.Domain.Services;
-using TestModel = RoomBooking.Domain.Models.Test;
 
 namespace RoomBooking.Test.Domain
 {
     [TestClass]
-    public class TestServiceTests
+    public class ValueServiceTests
     {
         [TestMethod]
         public async Task Should_Get_Tests()
         {
-            var testRepository = Substitute.For<ITestRepository>();
-            testRepository.GetTestsAsync().Returns(new List<TestModel>
+            var testRepository = Substitute.For<IValueRepository>();
+            testRepository.GetValuesAsync().Returns(new List<Value>
             {
-                new TestModel()
+                new Value()
             });
 
-            var service = new TestService(testRepository);
-            var result = await service.GetTestsAsync();
+            var service = new ValueService(testRepository);
+            var result = await service.GetValuesAsync();
 
             Assert.IsNotNull(result);
         }

@@ -20,8 +20,4 @@
     <ProjectReference Include="..\RoomBooking.Domain\RoomBooking.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
-
 </Project>

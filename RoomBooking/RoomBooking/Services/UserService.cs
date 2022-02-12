@@ -12,12 +12,12 @@ namespace RoomBooking.Api.Services
             dataAccess = bookingDataAccess;
         }
 
-        public async Task<int> AddUser(User user)
+        public async Task<int> AddUser(UserEntity user)
         {
             return await dataAccess.AddUser(user).ConfigureAwait(false);
         }
 
-        public async Task<User> GetUser(int id)
+        public async Task<UserEntity> GetUser(int id)
         {
             return await dataAccess.GetUser(id).ConfigureAwait(false);
         }
@@ -27,12 +27,12 @@ namespace RoomBooking.Api.Services
             return await dataAccess.DeleteUser(id).ConfigureAwait(false);
         }
 
-        public async Task<int> EditUser(User booking)
+        public async Task<int> EditUser(UserEntity booking)
         {
             return await dataAccess.EditUser(booking).ConfigureAwait(false);
         }
 
-        public async Task<List<User>> GetUsers()
+        public async Task<List<UserEntity>> GetUsers()
         {
             return await dataAccess.GetUsers().ConfigureAwait(false);
         }

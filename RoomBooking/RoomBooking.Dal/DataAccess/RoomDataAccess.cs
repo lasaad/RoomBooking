@@ -1,6 +1,6 @@
-﻿using RoomBooking.Dal.Interfaces;
+﻿using Microsoft.EntityFrameworkCore;
+using RoomBooking.Dal.Interfaces;
 using RoomBooking.Dal.Models;
-using System.Data.Entity;
 
 namespace RoomBooking.Dal.DataAccess
 {
@@ -13,25 +13,25 @@ namespace RoomBooking.Dal.DataAccess
             _context = context; 
         }
         
-        public async Task<Room> GetRoom(int id)
+        public async Task<RoomEntity> GetRoom(int id)
         {
             return await _context.Rooms.Where(b => b.Id == id).FirstOrDefaultAsync().ConfigureAwait(false);
         }
         
-        public async Task<List<Room>> GetRooms()
+        public async Task<List<RoomEntity>> GetRooms()
         {
             return await _context.Rooms.ToListAsync().ConfigureAwait(false);
         }
 
-        public async Task<int> AddRoom(Room room)
+        public async Task<int> AddRoom(RoomEntity room)
         {
             await _context.Rooms.AddAsync(room).ConfigureAwait(false);
             return _context.SaveChanges();
         }
 
-        public async Task<int> EditRoom(Room room)
+        public async Task<int> EditRoom(RoomEntity room)
         {
-            Room roomToEdit = await _context.Rooms.Where(b => b.Id == room.Id).FirstOrDefaultAsync().ConfigureAwait(false);
+            RoomEntity roomToEdit = await _context.Rooms.Where(b => b.Id == room.Id).FirstOrDefaultAsync().ConfigureAwait(false);
             if (roomToEdit != null)
                 roomToEdit = room;
 
@@ -40,7 +40,7 @@ namespace RoomBooking.Dal.DataAccess
 
         public async Task<int> DeleteRoom(int id)
         {
-            Room roomToDelete = await _context.Rooms.Where(b => b.Id == id).FirstOrDefaultAsync().ConfigureAwait(false);
+            RoomEntity roomToDelete = await _context.Rooms.Where(b => b.Id == id).FirstOrDefaultAsync().ConfigureAwait(false);
 
             if (roomToDelete != null)
                 _context.Rooms.Remove(roomToDelete);

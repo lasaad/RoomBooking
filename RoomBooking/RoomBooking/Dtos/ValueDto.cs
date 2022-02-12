@@ -1,6 +1,6 @@
 ﻿namespace RoomBooking.Api.Dtos
 {
-    public class TestDto
+    public class ValueDto
     {
         public int Id { get; set; }
         public string Name { get; set; }

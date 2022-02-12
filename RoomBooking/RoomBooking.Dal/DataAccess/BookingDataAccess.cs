@@ -1,8 +1,8 @@
 ﻿
 
+using Microsoft.EntityFrameworkCore;
 using RoomBooking.Dal.Interfaces;
 using RoomBooking.Dal.Models;
-using System.Data.Entity;
 
 namespace RoomBooking.Dal.DataAccess
 {
@@ -15,9 +15,9 @@ namespace RoomBooking.Dal.DataAccess
             _context = context; 
         }
         
-        public async Task<Booking> GetBooking(int id)
+        public async Task<BookingEntity> GetBooking(int id)
         {
-            return  await _context.Bookings.Where(b => b.Id == id).FirstOrDefaultAsync().ConfigureAwait(false);
+            return await _context.Bookings.Where(b => b.Id == id).FirstOrDefaultAsync().ConfigureAwait(false);
         }
 
         public async Task<bool> IsAvailable(int startSlot, int endSlot, int roomId, DateTime date)
@@ -25,21 +25,21 @@ namespace RoomBooking.Dal.DataAccess
             return await _context.Bookings.Where(b => b.Date == date && b.RoomId == roomId && b.StartSlot == startSlot && b.EndSlot == endSlot).AnyAsync().ConfigureAwait(false);
         }
 
-        public async Task<List<Booking>> AvailableBookOfDay(DateTime date)
+        public async Task<List<BookingEntity>> AvailableBookOfDay(DateTime date)
         {
             return await _context.Bookings.Where(b => b.Date == date).ToListAsync().ConfigureAwait(false);
 
         }
 
-        public async Task<int> AddBooking(Booking booking)
+        public async Task<int> AddBooking(BookingEntity booking)
         {
             await _context.Bookings.AddAsync(booking).ConfigureAwait(false);
             return _context.SaveChanges();
         }
 
-        public async Task<int> EditBooking(Booking booking)
+        public async Task<int> EditBooking(BookingEntity booking)
         {
-            Booking bookingToEdit = await _context.Bookings.Where(b => b.Id == booking.Id).FirstOrDefaultAsync().ConfigureAwait(false);
+            BookingEntity bookingToEdit = await _context.Bookings.Where(b => b.Id == booking.Id).FirstOrDefaultAsync().ConfigureAwait(false);
             if (bookingToEdit != null)
                 bookingToEdit = booking;
 
@@ -48,7 +48,7 @@ namespace RoomBooking.Dal.DataAccess
 
         public async Task<int> DeleteBooking(int id)
         {
-            Booking bookingToDelete = await _context.Bookings.Where(b => b.Id == id).FirstOrDefaultAsync().ConfigureAwait(false);
+            BookingEntity bookingToDelete = await _context.Bookings.Where(b => b.Id == id).FirstOrDefaultAsync().ConfigureAwait(false);
 
             if (bookingToDelete != null)
                 _context.Bookings.Remove(bookingToDelete);
@@ -56,7 +56,7 @@ namespace RoomBooking.Dal.DataAccess
             return _context.SaveChanges();
         }
 
-        public async Task<List<Booking>> GetBookings()
+        public async Task<List<BookingEntity>> GetBookings()
         {
             return await _context.Bookings.ToListAsync().ConfigureAwait(false);
         }

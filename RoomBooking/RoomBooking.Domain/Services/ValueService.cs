@@ -6,14 +6,14 @@ using RoomBooking.Domain.Models;
 
 namespace RoomBooking.Domain.Services
 {
-    public class TestService : ITestService
+    public class ValueService : IValueService
     {
-        private readonly ITestRepository _testRepository;
+        private readonly IValueRepository _testRepository;
 
-        public TestService(ITestRepository testRepository) =>
+        public ValueService(IValueRepository testRepository) =>
             _testRepository = testRepository;
 
-        public async Task<IEnumerable<Test>> GetTestsAsync() =>
-            await _testRepository.GetTestsAsync();
+        public async Task<IEnumerable<Value>> GetValuesAsync() =>
+            await _testRepository.GetValuesAsync();
     }
 }

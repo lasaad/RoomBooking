@@ -21,6 +21,7 @@ namespace RoomBooking.Controllers
 
         [HttpGet]
         [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(GetBookingsResponse))]
+        [Route("/Get/{id}")]
         public async Task<IActionResult> Get(int id)
         {
             BookingEntity result = await bookingService.GetBooking(id).ConfigureAwait(false);

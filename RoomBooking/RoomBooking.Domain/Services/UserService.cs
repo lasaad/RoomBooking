@@ -13,12 +13,27 @@ namespace RoomBooking.Domain.Services
         public UserService(IUserRepository userRepository) =>
             _userRepository = userRepository;
 
+        public Task<int> AddUserAsync(User user)
+        {
+            throw new System.NotImplementedException();
+        }
+
         public Task<int> AddUsersAsync(User user)
         {
             throw new System.NotImplementedException();
         }
 
+        public Task<int> DeleteUserAsync(int id)
+        {
+            throw new System.NotImplementedException();
+        }
+
         public Task<int> DeleteUsersAsync()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Task<int> EditUserAsync(User user)
         {
             throw new System.NotImplementedException();
         }

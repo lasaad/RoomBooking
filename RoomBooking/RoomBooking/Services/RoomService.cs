@@ -1,41 +1,41 @@
-﻿using RoomBooking.Api.Services.Interface;
-using RoomBooking.Dal.Interfaces;
-using RoomBooking.Dal.Models;
+﻿using RoomBooking.Dal.Models;
+using RoomBooking.Domain.Interfaces.Repositories;
+using RoomBooking.Domain.Interfaces.Services;
+using RoomBooking.Domain.Models;
 
 namespace RoomBooking.Api.Services
 {
     public class RoomService : IRoomService
     {
-        private readonly IRoomDataAccess dataAccess;
-        public RoomService(IRoomDataAccess bookingDataAccess)
+        private readonly IRoomRepository dataAccess;
+        public RoomService(IRoomRepository bookingDataAccess)
         {
             dataAccess = bookingDataAccess;
         }
 
-        public async Task<int> AddRoom(RoomEntity room)
+        public async Task<int> AddRoomAsync(Room room)
         {
-            return await dataAccess.AddRoom(room).ConfigureAwait(false);
+            return await dataAccess.AddRoomsAsync(room).ConfigureAwait(false);
         }
 
-        public async Task<RoomEntity> GetRoom(int id)
+        public async Task<Room> GetRoomAsync(int id)
         {
-            return await dataAccess.GetRoom(id).ConfigureAwait(false);
+            return await dataAccess.GetRoomAsync(id).ConfigureAwait(false);
         }
         
-        public async Task<List<RoomEntity>> GetRooms()
+        public async Task<IEnumerable<Room>> GetRoomsAsync()
         {
-            return await dataAccess.GetRooms().ConfigureAwait(false);
+            return await dataAccess.GetRoomsAsync().ConfigureAwait(false);
         }
 
-        public async Task<int> DeleteRoom(int id)
+        public async Task<int> DeleteRoomAsync(int id)
         {
-            return await dataAccess.DeleteRoom(id).ConfigureAwait(false);
+            return await dataAccess.DeleteRoomAsync(id).ConfigureAwait(false);
         }
 
-        public async Task<int> EditRoom(RoomEntity booking)
+        public async Task<int> EditRoomAsync(Room room)
         {
-            return await dataAccess.EditRoom(booking).ConfigureAwait(false);
+            return await dataAccess.EditRoomsAsync(room).ConfigureAwait(false);
         }
-
     }
 }

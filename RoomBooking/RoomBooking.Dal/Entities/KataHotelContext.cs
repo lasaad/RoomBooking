@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
-using RoomBooking.Dal.Interfaces;
 
 namespace RoomBooking.Dal.Models
 {

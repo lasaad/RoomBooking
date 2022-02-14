@@ -8,8 +8,8 @@ namespace RoomBooking.Domain.Interfaces.Services
     {
         Task<IEnumerable<User>> GetUsersAsync();
         Task<User> GetUserAsync(int id);
-        Task<int> EditUsersAsync(User user);
-        Task<int> AddUsersAsync(User user);
-        Task<int> DeleteUsersAsync();
+        Task<int> EditUserAsync(User user);
+        Task<int> AddUserAsync(User user);
+        Task<int> DeleteUserAsync(int id);
     }
 }

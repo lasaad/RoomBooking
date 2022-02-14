@@ -10,6 +10,6 @@ namespace RoomBooking.Domain.Interfaces.Repositories
         Task<Room> GetRoomAsync(int id);
         Task<int> EditRoomsAsync(Room room);
         Task<int> AddRoomsAsync(Room room);
-        Task<int> DeleteRoomsAsync();
+        Task<int> DeleteRoomAsync(int id);
     }
 }

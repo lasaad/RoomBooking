@@ -1,11 +1,12 @@
 using System.Net;
 using Microsoft.AspNetCore.Mvc;
 using RoomBooking.Api.Dtos.Responses;
-using RoomBooking.Api.Services.Interface;
 using RoomBooking.Dal.Models;
+using RoomBooking.Domain.Interfaces.Services;
+using RoomBooking.Domain.Models;
 using Swashbuckle.AspNetCore.Annotations;
 
-namespace RoomRoom.Controllers
+namespace RoomBooking.Controllers
 {
     [ApiController]
     [Route("[controller]")]
@@ -19,10 +20,11 @@ namespace RoomRoom.Controllers
         } 
 
         [HttpGet]
+        [Route("/Get")]
         [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(GetUsersResponse))]
-        public async Task<IActionResult> Get(int id)
+        public async Task<IActionResult> GetById(int id)
         {
-            UserEntity result = await userService.GetUser(id).ConfigureAwait(false);
+            User result = await userService.GetUserAsync(id).ConfigureAwait(false);
 
             return Ok(result);
         }
@@ -32,16 +34,16 @@ namespace RoomRoom.Controllers
         [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(GetUsersResponse))]
         public async Task<IActionResult> Get()
         {
-            List<UserEntity> result = await userService.GetUsers().ConfigureAwait(false);
+            IEnumerable<User> result = await userService.GetUsersAsync().ConfigureAwait(false);
 
-            return Ok(result);
+            return Ok(result.ToList());
         }
 
         [HttpPost]
         [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(GetUsersResponse))]
-        public async Task<IActionResult> AddUser([FromForm] UserEntity user)
+        public async Task<IActionResult> AddUser([FromForm] User user)
         {
-            int result = await userService.AddUser(user).ConfigureAwait(false);
+            int result = await userService.AddUserAsync(user).ConfigureAwait(false);
 
             return Ok(result);
 
@@ -49,9 +51,9 @@ namespace RoomRoom.Controllers
 
         [HttpPut]
         [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(GetUsersResponse))]
-        public async Task<IActionResult> EditUser([FromForm] UserEntity user)
+        public async Task<IActionResult> EditUser([FromForm] User user)
         {
-            int result = await userService.EditUser(user).ConfigureAwait(false);
+            int result = await userService.EditUserAsync(user).ConfigureAwait(false);
 
             return Ok(result);
 
@@ -61,7 +63,7 @@ namespace RoomRoom.Controllers
         [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(GetUsersResponse))]
         public async Task<IActionResult> DeleteUser(int id)
         {
-            int result = await userService.DeleteUser(id);
+            int result = await userService.DeleteUserAsync(id);
 
             return Ok(result);
         }

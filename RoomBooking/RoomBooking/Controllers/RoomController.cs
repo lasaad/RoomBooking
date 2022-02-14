@@ -1,8 +1,9 @@
 using System.Net;
 using Microsoft.AspNetCore.Mvc;
 using RoomBooking.Api.Dtos.Responses;
-using RoomBooking.Api.Services.Interface;
 using RoomBooking.Dal.Models;
+using RoomBooking.Domain.Interfaces.Services;
+using RoomBooking.Domain.Models;
 using Swashbuckle.AspNetCore.Annotations;
 
 namespace RoomBooking.Controllers
@@ -20,10 +21,10 @@ namespace RoomBooking.Controllers
 
         [HttpGet]
         [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(GetRoomsResponse))]
-        [Route("/Get/{id}")]
-        public async Task<IActionResult> Get(int id)
+        [Route("/GetRoom/{id}")]
+        public async Task<IActionResult> GetRoom(int id)
         {
-            RoomEntity result = await roomService.GetRoom(id).ConfigureAwait(false);
+            Room result = await roomService.GetRoomAsync(id).ConfigureAwait(false);
 
             if (result == null)
                 return NotFound(result);
@@ -34,9 +35,9 @@ namespace RoomBooking.Controllers
         [HttpPost]
         [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(GetRoomsResponse))]
         [Route("/AddRoom")]
-        public async Task<IActionResult> AddRoom([FromForm] RoomEntity room)
+        public async Task<IActionResult> AddRoom([FromForm] Room room)
         {
-            int result = await roomService.AddRoom(room).ConfigureAwait(false);
+            int result = await roomService.AddRoomAsync(room).ConfigureAwait(false);
 
             if (result == 0)
                 return Problem();
@@ -47,9 +48,9 @@ namespace RoomBooking.Controllers
         [HttpPut]
         [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(GetRoomsResponse))]
         [Route("/EditRoom")]
-        public async Task<IActionResult> EditRoom([FromForm] RoomEntity room)
+        public async Task<IActionResult> EditRoom([FromForm] Room room)
         {
-            int result = await roomService.EditRoom(room).ConfigureAwait(false);
+            int result = await roomService.EditRoomAsync(room).ConfigureAwait(false);
 
             if (result == 0)
                 return Problem();
@@ -62,7 +63,7 @@ namespace RoomBooking.Controllers
         [Route("DeleteRoom/{id}")]
         public async Task<IActionResult> DeleteRoom(int id)
         {
-            int result = await roomService.DeleteRoom(id).ConfigureAwait(false);
+            int result = await roomService.DeleteRoomAsync(id).ConfigureAwait(false);
 
             if (result == 0)
                 return Problem();

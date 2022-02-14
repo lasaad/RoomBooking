@@ -10,6 +10,6 @@ namespace RoomBooking.Domain.Interfaces.Repositories
         Task<User> GetUserAsync(int id);
         Task<int> EditUsersAsync(User user);
         Task<int> AddUsersAsync(User user);
-        Task<int> DeleteUsersAsync();
+        Task<int> DeleteUserAsync(int id);
     }
 }

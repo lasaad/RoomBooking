@@ -6,10 +6,10 @@ namespace RoomBooking.Domain.Interfaces.Services
 {
     public interface IBookingService
     {
-        Task<List<Booking>> GetBookingsAsync();
+        Task<IEnumerable<Booking>> GetBookingsAsync();
         Task<Booking> GetBookingAsync(int id);
-        Task<int> EditBookingsAsync(Booking booking);
-        Task<int> AddBookingsAsync(Booking booking);
-        Task<int> DeleteBookingsAsync();
+        Task<int> EditBookingAsync(Booking booking);
+        Task<int> AddBookingAsync(Booking booking);
+        Task<int> DeleteBookingAsync(int id);
     }
 }

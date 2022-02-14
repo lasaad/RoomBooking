@@ -10,38 +10,36 @@ namespace RoomBooking.Domain.Services
     {
         private readonly IBookingRepository _bookingRepository;
 
-        public BookingService(IBookingRepository bookingRepository) =>
+        public BookingService(IBookingRepository bookingRepository)
+        {
             _bookingRepository = bookingRepository;
+        }
 
-        public async Task<IEnumerable<Booking>> GetBookingsAsync() =>
-            await _bookingRepository.GetBookingsAsync();
+        public Task<int> AddBookingAsync(Booking booking)
+        {
+            throw new System.NotImplementedException();
+        }
 
-        public async Task<IEnumerable<Booking>> DeleteBookingAsync(int id) =>
-            await _bookingRepository.GetBookingsAsync();
+        public Task<int> DeleteBookingAsync(int id)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Task<int> EditBookingAsync(Booking booking)
+        {
+            throw new System.NotImplementedException();
+        }
 
         public Task<Booking> GetBookingAsync(int id)
         {
             throw new System.NotImplementedException();
         }
 
-        public Task<int> EditBookingsAsync(Booking booking)
+        public async Task<IEnumerable<Booking>> GetBookingsAsync()
         {
-            throw new System.NotImplementedException();
+            return await _bookingRepository.GetBookingsAsync();
         }
 
-        public Task<int> AddBookingsAsync(Booking booking)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public Task<int> DeleteBookingsAsync()
-        {
-            throw new System.NotImplementedException();
-        }
-
-        Task<List<Booking>> IBookingService.GetBookingsAsync()
-        {
-            throw new System.NotImplementedException();
-        }
+        
     }
 }

@@ -1,10 +1,12 @@
-using RoomBooking.Api.Services.Interface;
 using RoomBooking.Api.Services;
 using Microsoft.EntityFrameworkCore;
 using KataHotelContext = RoomBooking.Dal.Models.KataHotelContext;
-using RoomBooking.Dal.Interfaces;
 using RoomBooking.Dal.DataAccess;
-using RoomBooking.Dal;
+using RoomBooking.Dal.Repository;
+using RoomBooking.Domain.Interfaces.Repositories;
+using RoomBooking.Domain.Interfaces.Services;
+using RoomBooking.Dal.Repositories;
+using RoomBooking.Api.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,19 +22,19 @@ builder.Services.AddSwaggerGen();
 
 //Booking
 builder.Services.AddScoped<IBookingService, BookingService>();
-builder.Services.AddScoped<IBookingDataAccess, BookingDataAccess>();
+builder.Services.AddScoped<IBookingRepository, BookingRepository>();
 
 //Value
-builder.Services.AddScoped<RoomBooking.Domain.Interfaces.Services.IValueService, RoomBooking.Domain.Services.ValueService>();
-builder.Services.AddScoped<RoomBooking.Domain.Interfaces.Repositories.IValueRepository, RoomBooking.Dal.Repositories.ValueRepository>();
+builder.Services.AddScoped<IValueService, RoomBooking.Domain.Services.ValueService>();
+builder.Services.AddScoped<IValueRepository, ValueRepository>();
 
 //Room
 builder.Services.AddScoped<IRoomService, RoomService>();
-builder.Services.AddScoped<IRoomDataAccess, RoomDataAccess>();
+builder.Services.AddScoped<IRoomRepository, RoomRepository>();
 
 //User
 builder.Services.AddScoped<IUserService, UserService>();
-builder.Services.AddScoped<IUserDataAccess, UserDataAccess>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 //Contexte d'accès la BDD
 

@@ -4,12 +4,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NSubstitute;
 using RoomBooking.Api.Controllers;
-using RoomBooking.Api.Services.Interface;
 using RoomBooking.Controllers;
 using RoomBooking.Dal.Models;
 using RoomBooking.Domain.Interfaces.Services;
-using RoomRoom.Controllers;
-using IBookingService = RoomBooking.Api.Services.Interface.IBookingService;
+using RoomBooking.Domain.Models;
 
 namespace RoomBooking.Test.Api
 {
@@ -20,9 +18,9 @@ namespace RoomBooking.Test.Api
         public async Task Should_Get_Bookings()
         {
             IBookingService bookingService = Substitute.For<IBookingService>();
-            bookingService.GetBookings().Returns(new List<BookingEntity>
+            bookingService.GetBookingsAsync().Returns(new List<Booking>
             {
-                new BookingEntity()
+                new Booking()
             });
 
             BookingController controller = new BookingController(bookingService);
@@ -36,7 +34,7 @@ namespace RoomBooking.Test.Api
         public async Task Should_Get_Booking()
         {
             IBookingService bookingService = Substitute.For<IBookingService>();
-            bookingService.GetBooking(0).Returns(new BookingEntity());
+            bookingService.GetBookingAsync(0).Returns(new Booking());
 
             BookingController controller = new BookingController(bookingService);
             IActionResult response = await controller.Get(0);
@@ -49,10 +47,10 @@ namespace RoomBooking.Test.Api
         public async Task Should_Edit_Booking()
         {
             IBookingService bookingService = Substitute.For<IBookingService>();
-            bookingService.GetBooking(0).Returns(new BookingEntity());
+            bookingService.GetBookingAsync(0).Returns(new Booking());
 
             BookingController controller = new BookingController(bookingService);
-            IActionResult response = await controller.EditBooking(new BookingEntity());
+            IActionResult response = await controller.EditBooking(new Booking());
 
             Assert.IsNotNull(response);
             Assert.IsInstanceOfType(response, typeof(OkObjectResult));
@@ -62,10 +60,10 @@ namespace RoomBooking.Test.Api
         public async Task Should_Create_Booking()
         {
             IBookingService bookingService = Substitute.For<IBookingService>();
-            bookingService.GetBooking(0).Returns(new BookingEntity());
+            bookingService.GetBookingAsync(0).Returns(new Booking());
 
             BookingController controller = new BookingController(bookingService);
-            IActionResult response = await controller.AddBooking(new BookingEntity());
+            IActionResult response = await controller.AddBooking(new Booking());
 
             Assert.IsNotNull(response);
             Assert.IsInstanceOfType(response, typeof(OkObjectResult));
@@ -75,7 +73,7 @@ namespace RoomBooking.Test.Api
         public async Task Should_Delete_Booking()
         {
             IBookingService bookingService = Substitute.For<IBookingService>();
-            bookingService.GetBooking(0).Returns(new BookingEntity());
+            bookingService.GetBookingAsync(0).Returns(new Booking());
 
             BookingController controller = new BookingController(bookingService);
             IActionResult response = await controller.DeleteBooking(0);

@@ -1,42 +1,41 @@
-﻿using RoomBooking.Api.Services.Interface;
-using RoomBooking.Dal.Interfaces;
-using RoomBooking.Dal.Models;
+﻿using RoomBooking.Dal.Models;
+using RoomBooking.Domain.Interfaces.Repositories;
+using RoomBooking.Domain.Interfaces.Services;
+using RoomBooking.Domain.Models;
 
 namespace RoomBooking.Api.Services
 {
     public class BookingService : IBookingService
     {
-        private readonly IBookingDataAccess dataAccess;
-        public BookingService(IBookingDataAccess bookingDataAccess)
+        private readonly IBookingRepository repository;
+        public BookingService(IBookingRepository bookingRepository)
         {
-            dataAccess = bookingDataAccess; 
+            repository = bookingRepository; 
         }
 
-        public async Task<int> AddBooking(BookingEntity booking)
+        public async Task<int> AddBookingAsync(Booking booking)
         {
-            //var bookingExisted = dataAccess.()
-
-            return await dataAccess.AddBooking(booking).ConfigureAwait(false);
+            return await repository.AddBookingsAsync(booking).ConfigureAwait(false);
         }
 
-        public async Task<BookingEntity> GetBooking(int id)
+        public async Task<Booking> GetBookingAsync(int id)
         {
-            return await dataAccess.GetBooking(id).ConfigureAwait(false);
+            return await repository.GetBookingAsync(id).ConfigureAwait(false);
         }
 
-        public async Task<List<BookingEntity>> GetBookings()
+        public async Task<IEnumerable<Booking>> GetBookingsAsync()
         {
-            return await dataAccess.GetBookings().ConfigureAwait(false);
+            return await repository.GetBookingsAsync().ConfigureAwait(false);
         }
 
-        public async Task<int> DeleteBooking(int id)
+        public async Task<int> DeleteBookingAsync(int id)
         {
-            return await dataAccess.DeleteBooking(id).ConfigureAwait(false);
+            return await repository.DeleteBookingAsync(id).ConfigureAwait(false);
         }
 
-        public async Task<int> EditBooking(BookingEntity booking)
+        public async Task<int> EditBookingAsync(Booking booking)
         {
-            return await dataAccess.EditBooking(booking).ConfigureAwait(false);
+            return await repository.EditBookingsAsync(booking).ConfigureAwait(false);
         }
     }
 }

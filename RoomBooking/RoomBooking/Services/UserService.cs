@@ -1,41 +1,40 @@
-﻿using RoomBooking.Api.Services.Interface;
-using RoomBooking.Dal.Interfaces;
-using RoomBooking.Dal.Models;
+﻿using RoomBooking.Domain.Interfaces.Repositories;
+using RoomBooking.Domain.Interfaces.Services;
+using RoomBooking.Domain.Models;
 
 namespace RoomBooking.Api.Services
 {
     public class UserService : IUserService
     {
-        private readonly IUserDataAccess dataAccess;
-        public UserService(IUserDataAccess bookingDataAccess)
+        private readonly IUserRepository dataAccess;
+        public UserService(IUserRepository bookingDataAccess)
         {
             dataAccess = bookingDataAccess;
         }
 
-        public async Task<int> AddUser(UserEntity user)
+        public async Task<int> AddUserAsync(User user)
         {
-            return await dataAccess.AddUser(user).ConfigureAwait(false);
+            return await dataAccess.AddUsersAsync(user).ConfigureAwait(false);
         }
 
-        public async Task<UserEntity> GetUser(int id)
+        public async Task<User> GetUserAsync(int id)
         {
-            return await dataAccess.GetUser(id).ConfigureAwait(false);
+            return await dataAccess.GetUserAsync(id).ConfigureAwait(false);
         }
 
-        public async Task<int> DeleteUser(int id)
+        public async Task<IEnumerable<User>> GetUsersAsync()
         {
-            return await dataAccess.DeleteUser(id).ConfigureAwait(false);
+            return await dataAccess.GetUsersAsync().ConfigureAwait(false);
         }
 
-        public async Task<int> EditUser(UserEntity booking)
+        public async Task<int> DeleteUserAsync(int id)
         {
-            return await dataAccess.EditUser(booking).ConfigureAwait(false);
+            return await dataAccess.DeleteUserAsync(id).ConfigureAwait(false);
         }
 
-        public async Task<List<UserEntity>> GetUsers()
+        public async Task<int> EditUserAsync(User user)
         {
-            return await dataAccess.GetUsers().ConfigureAwait(false);
+            return await dataAccess.EditUsersAsync(user).ConfigureAwait(false);
         }
-
     }
 }

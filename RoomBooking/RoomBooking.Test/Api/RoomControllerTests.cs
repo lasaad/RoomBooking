@@ -4,12 +4,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NSubstitute;
 using RoomBooking.Api.Controllers;
-using RoomBooking.Api.Services.Interface;
 using RoomBooking.Controllers;
 using RoomBooking.Dal.Models;
 using RoomBooking.Domain.Interfaces.Services;
-using RoomRoom.Controllers;
-using IRoomService = RoomBooking.Api.Services.Interface.IRoomService;
+using RoomBooking.Domain.Models;
 
 namespace RoomBooking.Test.Api
 {
@@ -20,9 +18,9 @@ namespace RoomBooking.Test.Api
         public async Task Should_Get_Rooms()
         {
             IRoomService roomService = Substitute.For<IRoomService>();
-            roomService.GetRooms().Returns(new List<RoomEntity>
+            roomService.GetRoomsAsync().Returns(new List<Room>
             {
-                new RoomEntity()
+                new Room()
             });
 
             RoomController controller = new RoomController(roomService);
@@ -36,7 +34,7 @@ namespace RoomBooking.Test.Api
         public async Task Should_Get_Room()
         {
             IRoomService roomService = Substitute.For<IRoomService>();
-            roomService.GetRoom(0).Returns(new RoomEntity());
+            roomService.GetRoomAsync(0).Returns(new Room());
 
             RoomController controller = new RoomController(roomService);
             IActionResult response = await controller.Get(0);
@@ -49,10 +47,10 @@ namespace RoomBooking.Test.Api
         public async Task Should_Edit_Room()
         {
             IRoomService roomService = Substitute.For<IRoomService>();
-            roomService.GetRoom(0).Returns(new RoomEntity());
+            roomService.GetRoomAsync(0).Returns(new Room());
 
             RoomController controller = new RoomController(roomService);
-            IActionResult response = await controller.EditRoom(new RoomEntity());
+            IActionResult response = await controller.EditRoom(new Room());
 
             Assert.IsNotNull(response);
             Assert.IsInstanceOfType(response, typeof(OkObjectResult));
@@ -62,10 +60,10 @@ namespace RoomBooking.Test.Api
         public async Task Should_Create_Room()
         {
             IRoomService roomService = Substitute.For<IRoomService>();
-            roomService.GetRoom(0).Returns(new RoomEntity());
+            roomService.GetRoomAsync(0).Returns(new Room());
 
             RoomController controller = new RoomController(roomService);
-            IActionResult response = await controller.AddRoom(new RoomEntity());
+            IActionResult response = await controller.AddRoom(new Room());
 
             Assert.IsNotNull(response);
             Assert.IsInstanceOfType(response, typeof(OkObjectResult));
@@ -75,7 +73,7 @@ namespace RoomBooking.Test.Api
         public async Task Should_Delete_Room()
         {
             IRoomService roomService = Substitute.For<IRoomService>();
-            roomService.GetRoom(0).Returns(new RoomEntity());
+            roomService.GetRoomAsync(0).Returns(new Room());
 
             RoomController controller = new RoomController(roomService);
             IActionResult response = await controller.DeleteRoom(0);

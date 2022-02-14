@@ -10,20 +10,22 @@ namespace RoomBooking.Domain.Services
     {
         private readonly IRoomRepository _roomRepository;
 
-        public RoomService(IRoomRepository roomRepository) =>
+        public RoomService(IRoomRepository roomRepository)
+        {
             _roomRepository = roomRepository;
+        }
 
-        public Task<int> AddRoomsAsync(Room room)
+        public Task<int> AddRoomAsync(Room room)
         {
             throw new System.NotImplementedException();
         }
 
-        public Task<int> DeleteRoomsAsync()
+        public Task<int> DeleteRoomAsync(int id)
         {
             throw new System.NotImplementedException();
         }
 
-        public Task<int> EditRoomsAsync(Room room)
+        public Task<int> EditRoomAsync(Room room)
         {
             throw new System.NotImplementedException();
         }
@@ -33,7 +35,9 @@ namespace RoomBooking.Domain.Services
             throw new System.NotImplementedException();
         }
 
-        public async Task<IEnumerable<Room>> GetRoomsAsync() =>
-            await _roomRepository.GetRoomsAsync();
+        public Task<IEnumerable<Room>> GetRoomsAsync()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

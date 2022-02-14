@@ -1,9 +1,9 @@
-
 using System.Net;
 using Microsoft.AspNetCore.Mvc;
 using RoomBooking.Api.Dtos.Responses;
-using RoomBooking.Api.Services.Interface;
 using RoomBooking.Dal.Models;
+using RoomBooking.Domain.Interfaces.Services;
+using RoomBooking.Domain.Models;
 using Swashbuckle.AspNetCore.Annotations;
 
 namespace RoomBooking.Controllers
@@ -24,25 +24,25 @@ namespace RoomBooking.Controllers
         [Route("/Get/{id}")]
         public async Task<IActionResult> Get(int id)
         {
-            BookingEntity result = await bookingService.GetBooking(id).ConfigureAwait(false);
+            Booking result = await bookingService.GetBookingAsync(id).ConfigureAwait(false);
 
             return Ok(result);
         }
 
         [HttpPost]
         [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(GetBookingsResponse))]
-        public async Task<IActionResult> AddBooking([FromForm] BookingEntity booking)
+        public async Task<IActionResult> AddBooking([FromForm] Booking booking)
         {
-            int result = await bookingService.AddBooking(booking).ConfigureAwait(false);
+            int result = await bookingService.AddBookingAsync(booking).ConfigureAwait(false);
 
             return Ok(result);
         }
 
         [HttpPut]
         [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(GetBookingsResponse))]
-        public async Task<IActionResult> EditBooking([FromForm] BookingEntity booking)
+        public async Task<IActionResult> EditBooking([FromForm] Booking booking)
         {
-            int result = await bookingService.EditBooking(booking).ConfigureAwait(false);
+            int result = await bookingService.EditBookingAsync(booking).ConfigureAwait(false);
             
             return Ok(result);
         }
@@ -51,7 +51,7 @@ namespace RoomBooking.Controllers
         [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(GetBookingsResponse))]
         public async Task<IActionResult> DeleteBooking(int id)
         {
-            int result = await bookingService.DeleteBooking(id).ConfigureAwait(false);
+            int result = await bookingService.DeleteBookingAsync(id).ConfigureAwait(false);
 
             return Ok(result);
         }

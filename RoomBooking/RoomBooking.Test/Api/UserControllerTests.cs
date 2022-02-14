@@ -37,7 +37,7 @@ namespace RoomBooking.Test.Api
             userService.GetUserAsync(0).Returns(new User());
 
             UserController controller = new UserController(userService);
-            IActionResult response = await controller.Get(0);
+            IActionResult response = await controller.GetById(0);
 
             Assert.IsNotNull(response);
             Assert.IsInstanceOfType(response, typeof(OkObjectResult));

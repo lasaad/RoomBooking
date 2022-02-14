@@ -24,7 +24,7 @@ namespace RoomBooking.Test.Api
             });
 
             RoomController controller = new RoomController(roomService);
-            IActionResult response = await controller.Get(0);
+            IActionResult response = await controller.GetRoom(0);
 
             Assert.IsNotNull(response);
             Assert.IsInstanceOfType(response, typeof(OkObjectResult));
@@ -37,7 +37,7 @@ namespace RoomBooking.Test.Api
             roomService.GetRoomAsync(0).Returns(new Room());
 
             RoomController controller = new RoomController(roomService);
-            IActionResult response = await controller.Get(0);
+            IActionResult response = await controller.GetRoom(0);
 
             Assert.IsNotNull(response);
             Assert.IsInstanceOfType(response, typeof(OkObjectResult));

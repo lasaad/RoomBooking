@@ -35,6 +35,18 @@ namespace RoomBooking.Dal.Repository
             return bookingDTO;
         }
 
+        public async Task<IEnumerable<Booking>> GetBookingsByRoomAndDayAsync(DateTime day, int roomId)
+        {
+            Mapper mapper = new(_mapper);
+            var bookings = await _context.Bookings
+                                    .Where(b => b.Date == day && b.RoomId == roomId)
+                                    .ToListAsync()
+                                    .ConfigureAwait(false);
+            List<Booking> bookingDTO = mapper.Map<List<Booking>>(bookings);
+
+            return bookingDTO;
+        }
+
         public async Task<int> EditBookingsAsync(Booking booking)
         {
             Mapper mapper = new(_mapper);

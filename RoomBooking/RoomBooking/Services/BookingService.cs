@@ -37,5 +37,10 @@ namespace RoomBooking.Api.Services
         {
             return await repository.EditBookingsAsync(booking).ConfigureAwait(false);
         }
+
+        public Task<List<(int, int)>> GetAvailableSlot(DateTime day, int room)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

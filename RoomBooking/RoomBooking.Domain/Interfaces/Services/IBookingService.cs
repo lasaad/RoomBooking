@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using RoomBooking.Domain.Models;
 
@@ -11,5 +12,6 @@ namespace RoomBooking.Domain.Interfaces.Services
         Task<int> EditBookingAsync(Booking booking);
         Task<int> AddBookingAsync(Booking booking);
         Task<int> DeleteBookingAsync(int id);
+        Task<List<(int, int)>> GetAvailableSlot(DateTime day, int room);
     }
 }

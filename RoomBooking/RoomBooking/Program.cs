@@ -6,7 +6,7 @@ using RoomBooking.Dal.Repository;
 using RoomBooking.Domain.Interfaces.Repositories;
 using RoomBooking.Domain.Interfaces.Services;
 using RoomBooking.Dal.Repositories;
-using RoomBooking.Api.Services;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,6 +17,13 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+//Log
+string templateLog = "{Timestamp:yyyy-MM-dd HH:mm:ss} [{Level:u3}] {Message:lj}{NewLine}{Exception}";
+Log.Logger = new LoggerConfiguration()
+                .MinimumLevel.Debug()
+                .WriteTo.File("logs/ApiLog.txt", rollingInterval: RollingInterval.Day, 
+                                                 outputTemplate: templateLog)
+                .CreateLogger();
 
 //Injection de dépendance
 

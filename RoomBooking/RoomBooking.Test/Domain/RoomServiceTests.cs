@@ -71,5 +71,18 @@ namespace RoomBooking.Test.Domain
 
             Assert.Equals(result, 1);
         }
+
+        [TestMethod]
+        public async Task Should_Return_Nouveau_Creneau()
+        {
+            //Faire test sur domaine tout recuperer 
+            var roomRepository = Substitute.For<IRoomRepository>();
+            roomRepository.DeleteRoomAsync(0).Returns(1);
+
+            var service = new RoomService(roomRepository);
+            var result = await service.DeleteRoomAsync(0);
+
+            Assert.Equals(result, 1);
+        }
     }
 }

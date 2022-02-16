@@ -10,7 +10,7 @@ using TestModel = RoomBooking.Domain.Models.Value;
 namespace RoomBooking.Test.Api
 {
     [TestClass]
-    public class TestControllerTests
+    public class ValueControllerTests
     {
         [TestMethod]
         public async Task Should_Get_Tests()

@@ -17,24 +17,24 @@ namespace RoomBooking.Domain.Services
             _bookingRepository = bookingRepository;
         }
 
-        public Task<int> AddBookingAsync(Booking booking)
+        public async Task<int> AddBookingAsync(Booking booking)
         {
-            throw new System.NotImplementedException();
+            return await _bookingRepository.AddBookingsAsync(booking);
         }
 
-        public Task<int> DeleteBookingAsync(int id)
+        public async Task<int> DeleteBookingAsync(int id)
         {
-            throw new System.NotImplementedException();
+            return await _bookingRepository.DeleteBookingAsync(id);
         }
 
-        public Task<int> EditBookingAsync(Booking booking)
+        public async Task<int> EditBookingAsync(Booking booking)
         {
-            throw new System.NotImplementedException();
+            return await _bookingRepository.EditBookingsAsync(booking);
         }
 
-        public Task<Booking> GetBookingAsync(int id)
+        public async Task<Booking> GetBookingAsync(int id)
         {
-            throw new System.NotImplementedException();
+            return await _bookingRepository.GetBookingAsync(id);
         }
 
         public async Task<IEnumerable<Booking>> GetBookingsAsync()

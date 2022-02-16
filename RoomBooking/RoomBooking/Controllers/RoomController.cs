@@ -21,6 +21,19 @@ namespace RoomBooking.Controllers
 
         [HttpGet]
         [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(GetRoomsResponse))]
+        [Route("/GetRooms")]
+        public async Task<IActionResult> GetRooms()
+        {
+            IEnumerable<Room> result = await roomService.GetRoomsAsync().ConfigureAwait(false);
+
+            if (result == null)
+                return NotFound(result);
+
+            return Ok(result);
+        }
+
+        [HttpGet]
+        [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(GetRoomsResponse))]
         [Route("/GetRoom/{id}")]
         public async Task<IActionResult> GetRoom(int id)
         {

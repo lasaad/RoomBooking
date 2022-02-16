@@ -3,9 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NSubstitute;
-using RoomBooking.Api.Controllers;
 using RoomBooking.Controllers;
-using RoomBooking.Dal.Models;
 using RoomBooking.Domain.Interfaces.Services;
 using RoomBooking.Domain.Models;
 

@@ -41,7 +41,7 @@ namespace RoomBooking.Test.Domain
         public async Task Should_Edit_User()
         {
             var userRepository = Substitute.For<IUserRepository>();
-            userRepository.EditUsersAsync(new User()).Returns(1);
+            userRepository.EditUserAsync(new User()).Returns(1);
 
             var service = new UserService(userRepository);
             var result = await service.EditUserAsync(new User());
@@ -53,7 +53,7 @@ namespace RoomBooking.Test.Domain
         public async Task Should_Create_User()
         {
             var userRepository = Substitute.For<IUserRepository>();
-            userRepository.AddUsersAsync(new User()).Returns(1);
+            userRepository.AddUserAsync(new User()).Returns(1);
 
             var service = new UserService(userRepository);
             var result = await service.AddUserAsync(new User());

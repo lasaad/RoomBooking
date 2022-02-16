@@ -40,7 +40,7 @@ namespace RoomBooking.Test.Domain
         public async Task Should_Edit_Room()
         {
             var roomRepository = Substitute.For<IRoomRepository>();
-            roomRepository.EditRoomsAsync(new Room()).Returns(1);
+            roomRepository.EditRoomAsync(new Room()).Returns(1);
 
             var service = new RoomService(roomRepository);
             var result = await service.EditRoomAsync(new Room());
@@ -52,7 +52,7 @@ namespace RoomBooking.Test.Domain
         public async Task Should_Create_Room()
         {
             var roomRepository = Substitute.For<IRoomRepository>();
-            roomRepository.AddRoomsAsync(new Room()).Returns(1);
+            roomRepository.AddRoomAsync(new Room()).Returns(1);
 
             var service = new RoomService(roomRepository);
             var result = await service.AddRoomAsync(new Room());
@@ -75,7 +75,6 @@ namespace RoomBooking.Test.Domain
         [TestMethod]
         public async Task Should_Return_Nouveau_Creneau()
         {
-            //Faire test sur domaine tout recuperer 
             var roomRepository = Substitute.For<IRoomRepository>();
             roomRepository.DeleteRoomAsync(0).Returns(1);
 

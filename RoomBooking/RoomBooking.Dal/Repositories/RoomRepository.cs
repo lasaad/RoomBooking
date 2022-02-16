@@ -35,7 +35,7 @@ namespace RoomBooking.Dal.DataAccess
             return roomDTO;
         }
 
-        public async Task<int> EditRoomsAsync(Room room)
+        public async Task<int> EditRoomAsync(Room room)
         {
             Mapper mapper = new(_mapper);
 
@@ -48,7 +48,7 @@ namespace RoomBooking.Dal.DataAccess
             return _context.SaveChanges();
         }
 
-        public async Task<int> AddRoomsAsync(Room room)
+        public async Task<int> AddRoomAsync(Room room)
         {
             Mapper mapper = new(_mapper);
             RoomEntity roomEntity = mapper.Map<RoomEntity>(room);

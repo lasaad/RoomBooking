@@ -13,42 +13,29 @@ namespace RoomBooking.Domain.Services
         public UserService(IUserRepository userRepository) =>
             _userRepository = userRepository;
 
-        public Task<int> AddUserAsync(User user)
+        public async Task<int> AddUserAsync(User user)
         {
-            throw new System.NotImplementedException();
+            return await _userRepository.AddUserAsync(user);
         }
 
-        public Task<int> AddUsersAsync(User user)
+        public async Task<int> DeleteUserAsync(int id)
         {
-            throw new System.NotImplementedException();
+            return await _userRepository.DeleteUserAsync(id);
         }
 
-        public Task<int> DeleteUserAsync(int id)
+        public async Task<int> EditUserAsync(User user)
         {
-            throw new System.NotImplementedException();
+            return await _userRepository.EditUserAsync(user);
         }
 
-        public Task<int> DeleteUsersAsync()
+        public async Task<User> GetUserAsync(int id)
         {
-            throw new System.NotImplementedException();
+            return await _userRepository.GetUserAsync(id);
         }
 
-        public Task<int> EditUserAsync(User user)
+        public async Task<IEnumerable<User>> GetUsersAsync()
         {
-            throw new System.NotImplementedException();
+            return await _userRepository.GetUsersAsync();
         }
-
-        public Task<int> EditUsersAsync(User user)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public Task<User> GetUserAsync(int id)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public async Task<IEnumerable<User>> GetUsersAsync() =>
-            await _userRepository.GetUsersAsync();
     }
 }

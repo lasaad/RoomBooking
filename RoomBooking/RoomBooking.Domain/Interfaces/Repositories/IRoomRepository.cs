@@ -8,8 +8,8 @@ namespace RoomBooking.Domain.Interfaces.Repositories
     {
         Task<IEnumerable<Room>> GetRoomsAsync();
         Task<Room> GetRoomAsync(int id);
-        Task<int> EditRoomsAsync(Room room);
-        Task<int> AddRoomsAsync(Room room);
+        Task<int> EditRoomAsync(Room room);
+        Task<int> AddRoomAsync(Room room);
         Task<int> DeleteRoomAsync(int id);
     }
 }

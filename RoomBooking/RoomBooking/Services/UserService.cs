@@ -14,7 +14,7 @@ namespace RoomBooking.Api.Services
 
         public async Task<int> AddUserAsync(User user)
         {
-            return await dataAccess.AddUsersAsync(user).ConfigureAwait(false);
+            return await dataAccess.AddUserAsync(user).ConfigureAwait(false);
         }
 
         public async Task<User> GetUserAsync(int id)
@@ -34,7 +34,7 @@ namespace RoomBooking.Api.Services
 
         public async Task<int> EditUserAsync(User user)
         {
-            return await dataAccess.EditUsersAsync(user).ConfigureAwait(false);
+            return await dataAccess.EditUserAsync(user).ConfigureAwait(false);
         }
     }
 }

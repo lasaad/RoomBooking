@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NSubstitute;
-using RoomBooking.Dal.Models;
 using RoomBooking.Domain.Interfaces.Repositories;
 using RoomBooking.Domain.Models;
 using BookingService = RoomBooking.Domain.Services.BookingService;
@@ -41,7 +40,7 @@ namespace RoomBooking.Test.Domain
         public async Task Should_Edit_Booking()
         {
             var bookingRepository = Substitute.For<IBookingRepository>();
-            bookingRepository.EditBookingsAsync(new Booking()).Returns(1);
+            bookingRepository.EditBookingsAsync(new Booking()).Returns(0);
 
             var service = new BookingService(bookingRepository);
             var result = await service.EditBookingAsync(new Booking());
@@ -53,12 +52,12 @@ namespace RoomBooking.Test.Domain
         public async Task Should_Create_Booking()
         {
             var bookingRepository = Substitute.For<IBookingRepository>();
-            bookingRepository.AddBookingsAsync(new Booking()).Returns(1);
+            bookingRepository.AddBookingsAsync(new Booking()).Returns(0);
 
             var service = new BookingService(bookingRepository);
             var result = await service.AddBookingAsync(new Booking());
 
-            Assert.Equals(result, 1);
+            Assert.Equals(result, 0);
         }
 
         [TestMethod]

@@ -5,6 +5,7 @@ using RoomBooking.Dal.Models;
 using RoomBooking.Domain.Interfaces.Services;
 using RoomBooking.Domain.Models;
 using Swashbuckle.AspNetCore.Annotations;
+using ILogger = Serilog.ILogger;
 
 namespace RoomBooking.Controllers
 {
@@ -13,10 +14,12 @@ namespace RoomBooking.Controllers
     public class RoomController : ControllerBase
     {
         private readonly IRoomService roomService;
+        private readonly ILogger logger;
 
-        public RoomController(IRoomService service)
+        public RoomController(IRoomService service, ILogger log)
         {
             roomService = service;
+            logger = log;
         }
 
         [HttpGet]
@@ -25,10 +28,6 @@ namespace RoomBooking.Controllers
         public async Task<IActionResult> GetRooms()
         {
             IEnumerable<Room> result = await roomService.GetRoomsAsync().ConfigureAwait(false);
-
-            if (result == null)
-                return NotFound(result);
-
             return Ok(result);
         }
 
@@ -40,7 +39,10 @@ namespace RoomBooking.Controllers
             Room result = await roomService.GetRoomAsync(id).ConfigureAwait(false);
 
             if (result == null)
+            {
+                logger.Error("Ressouce non trouvé", id);
                 return NotFound(result);
+            }
 
             return Ok(result);
         }
@@ -53,7 +55,10 @@ namespace RoomBooking.Controllers
             int result = await roomService.AddRoomAsync(room).ConfigureAwait(false);
 
             if (result == 0)
-                return Problem();
+            {
+                logger.Error("Erreur lors de la création de la salle de réunion", room.Id);
+                return NotFound(result);
+            }
 
             return Ok(result);
         }
@@ -66,7 +71,10 @@ namespace RoomBooking.Controllers
             int result = await roomService.EditRoomAsync(room).ConfigureAwait(false);
 
             if (result == 0)
-                return Problem();
+            {
+                logger.Error("Erreur lors de la modification de la salle de réunion", room.Id);
+                return NotFound(result);
+            }
 
             return Ok(result);
         }
@@ -79,7 +87,10 @@ namespace RoomBooking.Controllers
             int result = await roomService.DeleteRoomAsync(id).ConfigureAwait(false);
 
             if (result == 0)
-                return Problem();
+            {
+                logger.Error("Erreur dans la tentative de suppression de la salle de réunion", id);
+                return NotFound(result);
+            }
 
             return Ok(result);
         }

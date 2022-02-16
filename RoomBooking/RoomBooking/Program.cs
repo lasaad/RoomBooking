@@ -21,9 +21,12 @@ builder.Services.AddSwaggerGen();
 string templateLog = "{Timestamp:yyyy-MM-dd HH:mm:ss} [{Level:u3}] {Message:lj}{NewLine}{Exception}";
 Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.Debug()
-                .WriteTo.File("logs/ApiLog.txt", rollingInterval: RollingInterval.Day, 
+                .WriteTo.File("./logs/ApiLog.txt", rollingInterval: RollingInterval.Day, 
                                                  outputTemplate: templateLog)
                 .CreateLogger();
+
+
+builder.Services.AddSingleton(Log.Logger);
 
 //Injection de dépendance
 
@@ -46,6 +49,7 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 //Contexte d'accès la BDD
 
 builder.Services.AddDbContext<KataHotelContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("RoomDatabase")));
+
 var app = builder.Build();
 
 

@@ -40,24 +40,24 @@ namespace RoomBooking.Test.Domain
         public async Task Should_Edit_Room()
         {
             var roomRepository = Substitute.For<IRoomRepository>();
-            roomRepository.EditRoomAsync(new Room()).Returns(0);
+            roomRepository.EditRoomAsync(new Room()).Returns(1);
 
             var service = new RoomService(roomRepository);
             var result = await service.EditRoomAsync(new Room());
 
-            Assert.AreEqual(result, 0);
+            Assert.AreEqual(result, 1);
         }
 
         [TestMethod]
         public async Task Should_Create_Room()
         {
             var roomRepository = Substitute.For<IRoomRepository>();
-            roomRepository.AddRoomAsync(new Room()).Returns(0);
+            roomRepository.AddRoomAsync(new Room()).Returns(1);
 
             var service = new RoomService(roomRepository);
             var result = await service.AddRoomAsync(new Room());
 
-            Assert.AreEqual(result, 0);
+            Assert.AreEqual(result, 1);
         }
 
         [TestMethod]

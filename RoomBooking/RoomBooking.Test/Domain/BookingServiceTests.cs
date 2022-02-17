@@ -80,17 +80,15 @@ namespace RoomBooking.Test.Domain
             bookings.Add(new Booking() { Date = DateTime.Now, StartSlot = 1, EndSlot = 3, RoomId = 1 });
             bookings.Add(new Booking() { Date = DateTime.Now, StartSlot = 5, EndSlot = 6, RoomId = 1 });
             bookings.Add(new Booking() { Date = DateTime.Now, StartSlot = 7, EndSlot = 8, RoomId = 1 });
-            bookings.Add(new Booking() { Date = DateTime.Now.AddDays(1), StartSlot = 1, EndSlot = 3, RoomId = 1 });
-            bookings.Add(new Booking() { Date = DateTime.Now, StartSlot = 1, EndSlot = 3, RoomId = 2 });
 
             //Faire test sur domaine tout recuperer 
             var bookingRepository = Substitute.For<IBookingRepository>();
-            bookingRepository.GetBookingsAsync().Returns(bookings);
+            bookingRepository.GetBookingsByRoomAndDayAsync(DateTime.Now, 1).ReturnsForAnyArgs(bookings);
 
             //Act
             var service = new BookingService(bookingRepository);
             var result = await service.GetAvailableSlot(DateTime.Now, 1);
-
+            
             //Assert
             Assert.AreEqual(result, 1);
         }

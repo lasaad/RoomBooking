@@ -45,7 +45,7 @@ namespace RoomBooking.Test.Domain
             var service = new BookingService(bookingRepository);
             var result = await service.EditBookingAsync(new Booking());
 
-            Assert.Equals(result, 1);
+            Assert.AreEqual(result, 0);
         }
 
         [TestMethod]
@@ -57,7 +57,7 @@ namespace RoomBooking.Test.Domain
             var service = new BookingService(bookingRepository);
             var result = await service.AddBookingAsync(new Booking());
 
-            Assert.Equals(result, 0);
+            Assert.AreEqual(result, 0);
         }
 
         [TestMethod]
@@ -69,7 +69,7 @@ namespace RoomBooking.Test.Domain
             var service = new BookingService(bookingRepository);
             var result = await service.DeleteBookingAsync(0);
 
-            Assert.Equals(result, 1);
+            Assert.AreEqual(result, 1);
         }
 
         [TestMethod]
@@ -92,7 +92,7 @@ namespace RoomBooking.Test.Domain
             var result = await service.GetAvailableSlot(DateTime.Now, 1);
 
             //Assert
-            Assert.Equals(result, 1);
+            Assert.AreEqual(result, 1);
         }
     }
 }

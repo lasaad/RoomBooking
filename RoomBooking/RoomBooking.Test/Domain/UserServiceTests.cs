@@ -46,7 +46,7 @@ namespace RoomBooking.Test.Domain
             var service = new UserService(userRepository);
             var result = await service.EditUserAsync(new User());
 
-            Assert.Equals(result, 0);
+            Assert.AreEqual(result, 0);
         }
 
         [TestMethod]
@@ -58,7 +58,7 @@ namespace RoomBooking.Test.Domain
             var service = new UserService(userRepository);
             var result = await service.AddUserAsync(new User());
 
-            Assert.Equals(result, 0);
+            Assert.AreEqual(result, 0);
         }
 
         [TestMethod]
@@ -70,7 +70,7 @@ namespace RoomBooking.Test.Domain
             var service = new UserService(userRepository);
             var result = await service.DeleteUserAsync(0);
 
-            Assert.Equals(result, 0);
+            Assert.AreEqual(result, 1);
         }
     }
 }

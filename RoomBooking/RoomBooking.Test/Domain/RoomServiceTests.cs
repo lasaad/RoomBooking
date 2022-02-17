@@ -40,24 +40,24 @@ namespace RoomBooking.Test.Domain
         public async Task Should_Edit_Room()
         {
             var roomRepository = Substitute.For<IRoomRepository>();
-            roomRepository.EditRoomAsync(new Room()).Returns(1);
+            roomRepository.EditRoomAsync(new Room()).Returns(0);
 
             var service = new RoomService(roomRepository);
             var result = await service.EditRoomAsync(new Room());
 
-            Assert.Equals(result, 1);
+            Assert.AreEqual(result, 0);
         }
 
         [TestMethod]
         public async Task Should_Create_Room()
         {
             var roomRepository = Substitute.For<IRoomRepository>();
-            roomRepository.AddRoomAsync(new Room()).Returns(1);
+            roomRepository.AddRoomAsync(new Room()).Returns(0);
 
             var service = new RoomService(roomRepository);
             var result = await service.AddRoomAsync(new Room());
 
-            Assert.Equals(result, 1);
+            Assert.AreEqual(result, 0);
         }
 
         [TestMethod]
@@ -69,7 +69,7 @@ namespace RoomBooking.Test.Domain
             var service = new RoomService(roomRepository);
             var result = await service.DeleteRoomAsync(0);
 
-            Assert.Equals(result, 1);
+            Assert.AreEqual(result, 1);
         }
 
         [TestMethod]
@@ -81,7 +81,7 @@ namespace RoomBooking.Test.Domain
             var service = new RoomService(roomRepository);
             var result = await service.DeleteRoomAsync(0);
 
-            Assert.Equals(result, 1);
+            Assert.AreEqual(result, 1);
         }
     }
 }

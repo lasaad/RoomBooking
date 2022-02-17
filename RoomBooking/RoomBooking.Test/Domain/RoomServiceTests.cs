@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NSubstitute;
-using RoomBooking.Dal.Models;
 using RoomBooking.Domain.Interfaces.Repositories;
 using RoomBooking.Domain.Models;
 using RoomService = RoomBooking.Api.Services.RoomService;
@@ -51,11 +50,52 @@ namespace RoomBooking.Test.Domain
         [TestMethod]
         public async Task Should_Create_Room()
         {
+            //var roomRepository = Substitute.For<IRoomRepository>();
+            //roomRepository.AddRoomAsync(new Room()).Returns(1);
+
+            //var service = new RoomService(roomRepository);
+            //var result = await service.AddRoomAsync(new Room());
+
+            //Assert.AreEqual(result, 1);
+
+            await Solution1Async();
+            await Solution2Async();
+            await Solution3Async();
+        }
+
+        private async Task Solution1Async()
+        {
+            var room = new Room(); // Same room instance
             var roomRepository = Substitute.For<IRoomRepository>();
-            roomRepository.AddRoomAsync(new Room()).Returns(1);
+            roomRepository.AddRoomAsync(room).Returns(1);
+
+            var service = new RoomService(roomRepository);
+            var result = await service.AddRoomAsync(room);
+
+            Assert.AreEqual(result, 1);
+        }
+
+        private async Task Solution2Async()
+        {
+            var roomRepository = Substitute.For<IRoomRepository>();
+            roomRepository.AddRoomAsync(default).ReturnsForAnyArgs(1); // Always return 1 whatever args
 
             var service = new RoomService(roomRepository);
             var result = await service.AddRoomAsync(new Room());
+
+            Assert.AreEqual(result, 1);
+        }
+
+        private async Task Solution3Async()
+        {
+            var roomRepository = Substitute.For<IRoomRepository>();
+            roomRepository.AddRoomAsync(Arg.Is<Room>(r => r.Name == "Name1")).Returns(1);
+
+            var service = new RoomService(roomRepository);
+            var result = await service.AddRoomAsync(new Room
+            {
+                Name = "Name1"
+            });
 
             Assert.AreEqual(result, 1);
         }

@@ -48,8 +48,6 @@ namespace RoomBooking.Domain.Services
             var bookings = (await _bookingRepository.GetBookingsByRoomAndDayAsync(day, room)).OrderBy(b => b.StartSlot).ToList();
             int?[] slots = new int?[24];
             (int, int) availableSlot = (-1, -1);
-            bool isBegin = true;
-
 
             foreach (var slot in bookings)
             {

@@ -77,9 +77,10 @@ namespace RoomBooking.Test.Domain
         {
             //Arrange
             List<Booking> bookings = new List<Booking>();
-            bookings.Add(new Booking() { Date = DateTime.Now, StartSlot = 1, EndSlot = 3, RoomId = 1 });
-            bookings.Add(new Booking() { Date = DateTime.Now, StartSlot = 5, EndSlot = 6, RoomId = 1 });
-            bookings.Add(new Booking() { Date = DateTime.Now, StartSlot = 7, EndSlot = 8, RoomId = 1 });
+            bookings.Add(new Booking() { Date = new DateTime(2022, 2, 18), StartSlot = 1, EndSlot = 3, RoomId = 1 });
+            bookings.Add(new Booking() { Date = new DateTime(2022, 2, 18), StartSlot = 5, EndSlot = 6, RoomId = 1 });
+            bookings.Add(new Booking() { Date = new DateTime(2022, 2, 18), StartSlot = 7, EndSlot = 8, RoomId = 1 });
+            bookings.Add(new Booking() { Date = new DateTime(2022, 2, 18), StartSlot = 15, EndSlot = 20, RoomId = 1 });
 
             //Faire test sur domaine tout recuperer 
             var bookingRepository = Substitute.For<IBookingRepository>();
@@ -88,7 +89,7 @@ namespace RoomBooking.Test.Domain
             //Act
             var service = new BookingService(bookingRepository);
             var result = await service.GetAvailableSlot(DateTime.Now, 1);
-            
+            var expectedResult = new List<(int, int)> { (0, 1), (3, 5), (6, 7), (8, 15), (21,24) };
             //Assert
             Assert.AreEqual(result, 1);
         }

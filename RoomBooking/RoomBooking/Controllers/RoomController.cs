@@ -33,7 +33,7 @@ namespace RoomBooking.Controllers
 
         [HttpGet]
         [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(GetRoomsResponse))]
-        [Route("/GetRoom/{id}")]
+        [Route("/GetRooms/{id}")]
         public async Task<IActionResult> GetRoom(int id)
         {
             Room result = await roomService.GetRoomAsync(id).ConfigureAwait(false);
@@ -49,46 +49,49 @@ namespace RoomBooking.Controllers
 
         [HttpPost]
         [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(GetRoomsResponse))]
-        [Route("/AddRoom")]
+        [Route("/AddRooms")]
         public async Task<IActionResult> AddRoom([FromForm] Room room)
         {
-            int result = await roomService.AddRoomAsync(room).ConfigureAwait(false);
-
-            if (result == 0)
+            if (ModelState.IsValid)
             {
-                logger.Error("Erreur lors de la création de la salle de réunion", room.Id);
-                return NotFound(result);
+                int result = await roomService.AddRoomAsync(room).ConfigureAwait(false);
+                if (result > 0)
+                    return Ok(result);
             }
 
-            return Ok(result);
+            return Problem("Invalid properties", "EditRoom", (int)HttpStatusCode.BadRequest);
         }
 
         [HttpPut]
         [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(GetRoomsResponse))]
-        [Route("/EditRoom")]
+        [Route("/EditRooms")]
         public async Task<IActionResult> EditRoom([FromForm] Room room)
         {
-            int result = await roomService.EditRoomAsync(room).ConfigureAwait(false);
-
-            if (result == 0)
+            if (ModelState.IsValid)
             {
-                logger.Error("Erreur lors de la modification de la salle de réunion", room.Id);
-                return NotFound(result);
-            }
+                int result = await roomService.EditRoomAsync(room).ConfigureAwait(false);
+                if (result == 0)
+                {
+                    logger.Error($"Ressource non trouvée {room.Id}");
+                    return NotFound(result);
+                }
+                return Ok(result);
 
-            return Ok(result);
+            }
+            else
+                return Problem("Invalid properties", "EditRoom", (int)HttpStatusCode.BadRequest);
         }
 
         [HttpDelete]
         [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(GetRoomsResponse))]
-        [Route("DeleteRoom/{id}")]
+        [Route("DeleteRooms/{id}")]
         public async Task<IActionResult> DeleteRoom(int id)
         {
             int result = await roomService.DeleteRoomAsync(id).ConfigureAwait(false);
 
             if (result == 0)
             {
-                logger.Error("Erreur dans la tentative de suppression de la salle de réunion", id);
+                logger.Error("Ressource non trouvée", id);
                 return NotFound(result);
             }
 

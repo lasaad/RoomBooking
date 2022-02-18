@@ -36,34 +36,19 @@ namespace RoomBooking.Test.Domain
         }
 
         [TestMethod]
-        public async Task Should_Edit_Room()
+        public async Task Should_EditRoom()
         {
+            var room = new Room(); // Same room instance
             var roomRepository = Substitute.For<IRoomRepository>();
-            roomRepository.EditRoomAsync(new Room()).Returns(1);
+            roomRepository.EditRoomAsync(room).Returns(1);
 
             var service = new RoomService(roomRepository);
-            var result = await service.EditRoomAsync(new Room());
+            var result = await service.EditRoomAsync(room);
 
-            Assert.AreEqual(result, 1);
         }
 
-        [TestMethod]
-        public async Task Should_Create_Room()
-        {
-            //var roomRepository = Substitute.For<IRoomRepository>();
-            //roomRepository.AddRoomAsync(new Room()).Returns(1);
-
-            //var service = new RoomService(roomRepository);
-            //var result = await service.AddRoomAsync(new Room());
-
-            //Assert.AreEqual(result, 1);
-
-            await Solution1Async();
-            await Solution2Async();
-            await Solution3Async();
-        }
-
-        private async Task Solution1Async()
+            [TestMethod]
+        public async Task Should_CreateRoomByRef()
         {
             var room = new Room(); // Same room instance
             var roomRepository = Substitute.For<IRoomRepository>();
@@ -75,7 +60,8 @@ namespace RoomBooking.Test.Domain
             Assert.AreEqual(result, 1);
         }
 
-        private async Task Solution2Async()
+        [TestMethod]
+        public async Task Should_CreateRoomByAnyArg()
         {
             var roomRepository = Substitute.For<IRoomRepository>();
             roomRepository.AddRoomAsync(default).ReturnsForAnyArgs(1); // Always return 1 whatever args
@@ -86,7 +72,8 @@ namespace RoomBooking.Test.Domain
             Assert.AreEqual(result, 1);
         }
 
-        private async Task Solution3Async()
+        [TestMethod]
+        public async Task Should_CreateRoomBySameParam()
         {
             var roomRepository = Substitute.For<IRoomRepository>();
             roomRepository.AddRoomAsync(Arg.Is<Room>(r => r.Name == "Name1")).Returns(1);

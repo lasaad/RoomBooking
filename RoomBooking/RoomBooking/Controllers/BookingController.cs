@@ -10,7 +10,6 @@ using ILogger = Serilog.ILogger;
 namespace RoomBooking.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
     public class BookingController : ControllerBase
     {
         private readonly IBookingService bookingService;
@@ -33,7 +32,7 @@ namespace RoomBooking.Controllers
 
         [HttpGet]
         [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(GetBookingsResponse))]
-        [SwaggerResponse((int)HttpStatusCode.NotFound, Type = typeof(GetBookingsResponse))]
+        [SwaggerResponse((int)HttpStatusCode.NotFound, Type = typeof(NotFoundObjectResult))]
         [Route("/Bookings/{id}")]
         public async Task<IActionResult> GetBooking(int id)
         {
@@ -50,7 +49,7 @@ namespace RoomBooking.Controllers
 
         [HttpPost]
         [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(GetBookingsResponse))]
-        [SwaggerResponse((int)HttpStatusCode.BadRequest, Type = typeof(GetBookingsResponse))]
+        [SwaggerResponse((int)HttpStatusCode.BadRequest, Type = typeof(BadRequestObjectResult))]
         [Route("/Bookings")]
         public async Task<IActionResult> AddBooking([FromForm] Booking booking)
         {
@@ -66,7 +65,7 @@ namespace RoomBooking.Controllers
 
         [HttpPut]
         [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(GetBookingsResponse))]
-        [SwaggerResponse((int)HttpStatusCode.NotFound, Type = typeof(GetBookingsResponse))]
+        [SwaggerResponse((int)HttpStatusCode.NotFound, Type = typeof(NotFoundObjectResult))]
         [Route("/Bookings")]
         public async Task<IActionResult> EditBooking([FromForm] Booking booking)
         {
@@ -87,7 +86,7 @@ namespace RoomBooking.Controllers
 
         [HttpDelete]
         [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(GetBookingsResponse))]
-        [SwaggerResponse((int)HttpStatusCode.NotFound, Type = typeof(GetBookingsResponse))]
+        [SwaggerResponse((int)HttpStatusCode.NotFound, Type = typeof(NotFoundObjectResult))]
         [Route("/Bookings/{id}")]
         public async Task<IActionResult> DeleteBooking(int id)
         {

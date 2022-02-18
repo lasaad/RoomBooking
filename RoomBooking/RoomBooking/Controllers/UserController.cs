@@ -49,7 +49,7 @@ namespace RoomBooking.Controllers
 
         [HttpPost]
         [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(GetUsersResponse))]
-        [SwaggerResponse((int)HttpStatusCode.BadRequest, Type = typeof(GetUsersResponse))]
+        [SwaggerResponse((int)HttpStatusCode.BadRequest, Type = typeof(BadRequestObjectResult))]
         [Route("/Users")]
         public async Task<IActionResult> AddUser([FromForm] User user)
         {
@@ -65,7 +65,7 @@ namespace RoomBooking.Controllers
 
         [HttpPut]
         [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(GetUsersResponse))]
-        [SwaggerResponse((int)HttpStatusCode.NotFound, Type = typeof(GetUsersResponse))]
+        [SwaggerResponse((int)HttpStatusCode.NotFound, Type = typeof(NotFoundObjectResult))]
         [Route("/Users")]
         public async Task<IActionResult> EditUser([FromForm] User user)
         {
@@ -81,13 +81,13 @@ namespace RoomBooking.Controllers
 
             }
             else
-                return Problem("Invalid properties", "EditUser", (int)HttpStatusCode.BadRequest);
+                return BadRequest(ModelState);
         }
 
         [HttpDelete]
         [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(GetUsersResponse))]
-        [SwaggerResponse((int)HttpStatusCode.NotFound, Type = typeof(GetUsersResponse))]
-        [Route("Users/{id}")]
+        [SwaggerResponse((int)HttpStatusCode.NotFound, Type = typeof(NotFoundObjectResult))]
+        [Route("/Users/{id}")]
         public async Task<IActionResult> DeleteUser(int id)
         {
             int result = await userService.DeleteUserAsync(id).ConfigureAwait(false);

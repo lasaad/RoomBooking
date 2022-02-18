@@ -29,7 +29,7 @@ namespace RoomBooking.Test.Api
             IActionResult response = await controller.GetBooking(0);
 
             Assert.IsNotNull(response);
-            Assert.IsInstanceOfType(response, typeof(OkObjectResult));
+            Assert.IsInstanceOfType(response, typeof(IActionResult));
         }
 
         [TestMethod]
@@ -44,7 +44,7 @@ namespace RoomBooking.Test.Api
             IActionResult response = await controller.GetBooking(0);
 
             Assert.IsNotNull(response);
-            Assert.IsInstanceOfType(response, typeof(OkObjectResult));
+            Assert.IsInstanceOfType(response, typeof(IActionResult));
         }
 
         [TestMethod]
@@ -59,22 +59,23 @@ namespace RoomBooking.Test.Api
             IActionResult response = await controller.EditBooking(new Booking());
 
             Assert.IsNotNull(response);
-            Assert.IsInstanceOfType(response, typeof(OkObjectResult));
+            Assert.IsInstanceOfType(response, typeof(IActionResult));
         }
 
         [TestMethod]
         public async Task Should_Create_Booking()
         {
+            Booking booking = new();
             IBookingService bookingService = Substitute.For<IBookingService>();
             ILogger loggerService = Substitute.For<ILogger>();
 
-            bookingService.GetBookingAsync(0).Returns(new Booking());
+            bookingService.GetBookingAsync(0).Returns(booking);
 
             BookingController controller = new BookingController(bookingService, loggerService);
-            IActionResult response = await controller.AddBooking(new Booking());
+            IActionResult response = await controller.AddBooking(booking);
 
             Assert.IsNotNull(response);
-            Assert.IsInstanceOfType(response, typeof(OkObjectResult));
+            Assert.IsInstanceOfType(response, typeof(IActionResult));
         }
 
         [TestMethod]
@@ -89,7 +90,7 @@ namespace RoomBooking.Test.Api
             IActionResult response = await controller.DeleteBooking(0);
 
             Assert.IsNotNull(response);
-            Assert.IsInstanceOfType(response, typeof(OkObjectResult));
+            Assert.IsInstanceOfType(response, typeof(IActionResult));
         }
     }
 }

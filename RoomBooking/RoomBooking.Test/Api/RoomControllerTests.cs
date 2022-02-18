@@ -29,7 +29,7 @@ namespace RoomBooking.Test.Api
             IActionResult response = await controller.GetRooms();
 
             Assert.IsNotNull(response);
-            Assert.IsInstanceOfType(response, typeof(OkObjectResult));
+            Assert.IsInstanceOfType(response, typeof(IActionResult));
         }
 
         [TestMethod]
@@ -44,7 +44,7 @@ namespace RoomBooking.Test.Api
             IActionResult response = await controller.GetRoom(0);
 
             Assert.IsNotNull(response);
-            Assert.IsInstanceOfType(response, typeof(OkObjectResult));
+            Assert.IsInstanceOfType(response, typeof(IActionResult));
         }
 
         [TestMethod]
@@ -59,7 +59,7 @@ namespace RoomBooking.Test.Api
             IActionResult response = await controller.EditRoom(new Room());
 
             Assert.IsNotNull(response);
-            //Assert.IsInstanceOfType(response, typeof(ObjectResult));
+            Assert.IsInstanceOfType(response, typeof(ObjectResult));
         }
 
         [TestMethod]
@@ -74,7 +74,7 @@ namespace RoomBooking.Test.Api
             IActionResult response = await controller.AddRoom(new Room());
 
             Assert.IsNotNull(response);
-            //Assert.IsInstanceOfType(response, typeof(OkObjectResult));
+            Assert.IsInstanceOfType(response, typeof(IActionResult));
         }
 
         [TestMethod]
@@ -89,7 +89,7 @@ namespace RoomBooking.Test.Api
             IActionResult response = await controller.DeleteRoom(0);
 
             Assert.IsNotNull(response);
-            //Assert.IsInstanceOfType(response, typeof(OkObjectResult));
+            Assert.IsInstanceOfType(response, typeof(IActionResult));
         }
     }
 }

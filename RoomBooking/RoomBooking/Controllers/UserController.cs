@@ -10,7 +10,6 @@ using ILogger = Serilog.ILogger;
 namespace RoomBooking.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
     public class UserController : ControllerBase
     {
         private readonly IUserService userService;
@@ -24,7 +23,7 @@ namespace RoomBooking.Controllers
 
         [HttpGet]
         [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(GetUsersResponse))]
-        [Route("/GetUsers")]
+        [Route("/Users")]
         public async Task<IActionResult> GetUsers()
         {
             IEnumerable<User> result = await userService.GetUsersAsync().ConfigureAwait(false);
@@ -34,7 +33,7 @@ namespace RoomBooking.Controllers
         [HttpGet]
         [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(GetUsersResponse))]
         [SwaggerResponse((int)HttpStatusCode.BadRequest, Type = typeof(GetUsersResponse))]
-        [Route("/GetUsers/{id}")]
+        [Route("/Users/{id}")]
         public async Task<IActionResult> GetUser(int id)
         {
             User result = await userService.GetUserAsync(id).ConfigureAwait(false);
@@ -51,7 +50,7 @@ namespace RoomBooking.Controllers
         [HttpPost]
         [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(GetUsersResponse))]
         [SwaggerResponse((int)HttpStatusCode.BadRequest, Type = typeof(GetUsersResponse))]
-        [Route("/AddUsers")]
+        [Route("/Users")]
         public async Task<IActionResult> AddUser([FromForm] User user)
         {
             if (ModelState.IsValid)
@@ -67,7 +66,7 @@ namespace RoomBooking.Controllers
         [HttpPut]
         [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(GetUsersResponse))]
         [SwaggerResponse((int)HttpStatusCode.NotFound, Type = typeof(GetUsersResponse))]
-        [Route("/EditUsers")]
+        [Route("/Users")]
         public async Task<IActionResult> EditUser([FromForm] User user)
         {
             if (ModelState.IsValid)
@@ -88,7 +87,7 @@ namespace RoomBooking.Controllers
         [HttpDelete]
         [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(GetUsersResponse))]
         [SwaggerResponse((int)HttpStatusCode.NotFound, Type = typeof(GetUsersResponse))]
-        [Route("DeleteUsers/{id}")]
+        [Route("Users/{id}")]
         public async Task<IActionResult> DeleteUser(int id)
         {
             int result = await userService.DeleteUserAsync(id).ConfigureAwait(false);

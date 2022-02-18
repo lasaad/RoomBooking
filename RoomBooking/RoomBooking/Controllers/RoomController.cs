@@ -24,7 +24,7 @@ namespace RoomBooking.Controllers
 
         [HttpGet]
         [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(GetRoomsResponse))]
-        [Route("/GetRooms")]
+        [Route("/Rooms")]
         public async Task<IActionResult> GetRooms()
         {
             IEnumerable<Room> result = await roomService.GetRoomsAsync().ConfigureAwait(false);
@@ -34,7 +34,7 @@ namespace RoomBooking.Controllers
         [HttpGet]
         [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(GetRoomsResponse))]
         [SwaggerResponse((int)HttpStatusCode.NotFound, Type = typeof(GetRoomsResponse))]
-        [Route("/GetRooms/{id}")]
+        [Route("/Rooms/{id}")]
         public async Task<IActionResult> GetRoom(int id)
         {
             Room result = await roomService.GetRoomAsync(id).ConfigureAwait(false);
@@ -51,7 +51,7 @@ namespace RoomBooking.Controllers
         [HttpPost]
         [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(GetRoomsResponse))]
         [SwaggerResponse((int)HttpStatusCode.BadRequest, Type = typeof(GetRoomsResponse))]
-        [Route("/AddRooms")]
+        [Route("/Rooms")]
         public async Task<IActionResult> AddRoom([FromForm] Room room)
         {
             if (ModelState.IsValid)
@@ -67,7 +67,7 @@ namespace RoomBooking.Controllers
         [HttpPut]
         [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(GetRoomsResponse))]
         [SwaggerResponse((int)HttpStatusCode.NotFound, Type = typeof(GetRoomsResponse))]
-        [Route("/EditRooms")]
+        [Route("/Rooms")]
         public async Task<IActionResult> EditRoom([FromForm] Room room)
         {
             if (ModelState.IsValid)
@@ -88,7 +88,7 @@ namespace RoomBooking.Controllers
         [HttpDelete]
         [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(GetRoomsResponse))]
         [SwaggerResponse((int)HttpStatusCode.NotFound, Type = typeof(GetRoomsResponse))]
-        [Route("DeleteRooms/{id}")]
+        [Route("Rooms/{id}")]
         public async Task<IActionResult> DeleteRoom(int id)
         {
             int result = await roomService.DeleteRoomAsync(id).ConfigureAwait(false);

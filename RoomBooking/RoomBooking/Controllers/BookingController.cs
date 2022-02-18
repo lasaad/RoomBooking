@@ -24,7 +24,7 @@ namespace RoomBooking.Controllers
 
         [HttpGet]
         [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(GetBookingsResponse))]
-        [Route("/GetBookings")]
+        [Route("/Bookings")]
         public async Task<IActionResult> GetBookings()
         {
             IEnumerable<Booking> result = await bookingService.GetBookingsAsync().ConfigureAwait(false);
@@ -34,7 +34,7 @@ namespace RoomBooking.Controllers
         [HttpGet]
         [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(GetBookingsResponse))]
         [SwaggerResponse((int)HttpStatusCode.NotFound, Type = typeof(GetBookingsResponse))]
-        [Route("/GetBookings/{id}")]
+        [Route("/Bookings/{id}")]
         public async Task<IActionResult> GetBooking(int id)
         {
             Booking result = await bookingService.GetBookingAsync(id).ConfigureAwait(false);
@@ -51,7 +51,7 @@ namespace RoomBooking.Controllers
         [HttpPost]
         [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(GetBookingsResponse))]
         [SwaggerResponse((int)HttpStatusCode.BadRequest, Type = typeof(GetBookingsResponse))]
-        [Route("/AddBookings")]
+        [Route("/Bookings")]
         public async Task<IActionResult> AddBooking([FromForm] Booking booking)
         {
             if (ModelState.IsValid)
@@ -67,7 +67,7 @@ namespace RoomBooking.Controllers
         [HttpPut]
         [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(GetBookingsResponse))]
         [SwaggerResponse((int)HttpStatusCode.NotFound, Type = typeof(GetBookingsResponse))]
-        [Route("/EditBookings")]
+        [Route("/Bookings")]
         public async Task<IActionResult> EditBooking([FromForm] Booking booking)
         {
             if (ModelState.IsValid)
@@ -88,7 +88,7 @@ namespace RoomBooking.Controllers
         [HttpDelete]
         [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(GetBookingsResponse))]
         [SwaggerResponse((int)HttpStatusCode.NotFound, Type = typeof(GetBookingsResponse))]
-        [Route("DeleteBookings/{id}")]
+        [Route("/Bookings/{id}")]
         public async Task<IActionResult> DeleteBooking(int id)
         {
             int result = await bookingService.DeleteBookingAsync(id).ConfigureAwait(false);

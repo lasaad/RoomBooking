@@ -32,7 +32,7 @@ namespace RoomBooking.Controllers
 
         [HttpGet]
         [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(GetUsersResponse))]
-        [SwaggerResponse((int)HttpStatusCode.BadRequest, Type = typeof(GetUsersResponse))]
+        [SwaggerResponse((int)HttpStatusCode.BadRequest, Type = typeof(BadRequestObjectResult))]
         [Route("/Users/{id}")]
         public async Task<IActionResult> GetUser(int id)
         {
@@ -40,7 +40,7 @@ namespace RoomBooking.Controllers
 
             if (result == null)
             {
-                logger.Error("Ressouce non trouvé", id);
+                logger.Error("Ressouce non trouvé {id}", id);
                 return BadRequest(ModelState);
             }
 
@@ -58,6 +58,11 @@ namespace RoomBooking.Controllers
                 int result = await userService.AddUserAsync(user).ConfigureAwait(false);
                 if (result > 0)
                     return Ok(result);
+                else
+                {
+                    logger.Error("Erreur lors de l'ajout de la ressouce {id}", user.Id);
+                    BadRequest(ModelState);
+                }
             }
 
             return BadRequest(ModelState);
@@ -74,7 +79,7 @@ namespace RoomBooking.Controllers
                 int result = await userService.EditUserAsync(user).ConfigureAwait(false);
                 if (result == 0)
                 {
-                    logger.Error($"Ressource non trouvée {user.Id}");
+                    logger.Error("Ressource non trouvée {id}", user.Id );
                     return NotFound(result);
                 }
                 return Ok(result);
@@ -94,7 +99,7 @@ namespace RoomBooking.Controllers
 
             if (result == 0)
             {
-                logger.Error("Ressource non trouvée", id);
+                logger.Error("Ressource non trouvée {id}", id);
                 return NotFound(result);
             }
 

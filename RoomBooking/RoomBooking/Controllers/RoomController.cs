@@ -40,7 +40,7 @@ namespace RoomBooking.Controllers
 
             if (result == null)
             {
-                logger.Error("Ressouce non trouvé", id);
+                logger.Error("Ressouce non trouvé {id}", id);
                 return NotFound(result);
             }
 
@@ -58,6 +58,11 @@ namespace RoomBooking.Controllers
                 int result = await roomService.AddRoomAsync(room).ConfigureAwait(false);
                 if (result > 0)
                     return Ok(result);
+                else
+                {
+                    logger.Error("Erreur lors de l'ajout de la ressouce {id}", room.Id);
+                    BadRequest(ModelState);
+                }
             }
 
             return BadRequest(ModelState);
@@ -66,6 +71,7 @@ namespace RoomBooking.Controllers
         [HttpPut]
         [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(GetRoomsResponse))]
         [SwaggerResponse((int)HttpStatusCode.NotFound, Type = typeof(NotFoundObjectResult))]
+        [SwaggerResponse((int)HttpStatusCode.BadRequest, Type = typeof(BadRequestObjectResult))]
         [Route("/Rooms")]
         public async Task<IActionResult> EditRoom([FromForm] Room room)
         {
@@ -74,14 +80,14 @@ namespace RoomBooking.Controllers
                 int result = await roomService.EditRoomAsync(room).ConfigureAwait(false);
                 if (result == 0)
                 {
-                    logger.Error($"Ressource non trouvée {room.Id}");
+                    logger.Error("Ressource non trouvée {Id}", room.Id);
                     return NotFound(result);
                 }
                 return Ok(result);
 
             }
             else
-                return Problem("Invalid properties", "EditRoom", (int)HttpStatusCode.BadRequest);
+                return BadRequest(ModelState);
         }
 
         [HttpDelete]
@@ -94,7 +100,7 @@ namespace RoomBooking.Controllers
 
             if (result == 0)
             {
-                logger.Error("Ressource non trouvée", id);
+                logger.Error("Ressource non trouvée {id}", id);
                 return NotFound(result);
             }
 

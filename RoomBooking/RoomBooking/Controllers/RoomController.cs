@@ -59,7 +59,7 @@ namespace RoomBooking.Controllers
                     return Ok(result);
             }
 
-            return Problem("Invalid properties", "EditRoom", (int)HttpStatusCode.BadRequest);
+            return BadRequest(ModelState);
         }
 
         [HttpPut]

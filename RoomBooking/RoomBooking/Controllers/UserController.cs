@@ -41,7 +41,7 @@ namespace RoomBooking.Controllers
             if (result == null)
             {
                 logger.Error("Ressouce non trouvé", id);
-                return NotFound(result);
+                return BadRequest(ModelState);
             }
 
             return Ok(result);
@@ -59,7 +59,7 @@ namespace RoomBooking.Controllers
                     return Ok(result);
             }
 
-            return Problem("Invalid properties", "EditUser", (int)HttpStatusCode.BadRequest);
+            returnreturn BadRequest(ModelState);
         }
 
         [HttpPut]

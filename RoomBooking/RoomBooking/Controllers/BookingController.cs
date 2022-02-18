@@ -59,7 +59,7 @@ namespace RoomBooking.Controllers
                     return Ok(result);
             }
 
-            return Problem("Invalid properties", "EditBooking", (int)HttpStatusCode.BadRequest);
+            return BadRequest(ModelState);
         }
 
         [HttpPut]
@@ -79,11 +79,12 @@ namespace RoomBooking.Controllers
 
             }
             else
-                return Problem("Invalid properties", "EditBooking", (int)HttpStatusCode.BadRequest);
+                return BadRequest(ModelState);
         }
 
         [HttpDelete]
         [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(GetBookingsResponse))]
+        [SwaggerResponse((int)HttpStatusCode.NotFound, Type = typeof(GetBookingsResponse))]
         [Route("DeleteBookings/{id}")]
         public async Task<IActionResult> DeleteBooking(int id)
         {

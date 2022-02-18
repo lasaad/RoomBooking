@@ -33,6 +33,7 @@ namespace RoomBooking.Controllers
 
         [HttpGet]
         [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(GetBookingsResponse))]
+        [SwaggerResponse((int)HttpStatusCode.NotFound, Type = typeof(GetBookingsResponse))]
         [Route("/GetBookings/{id}")]
         public async Task<IActionResult> GetBooking(int id)
         {
@@ -49,6 +50,7 @@ namespace RoomBooking.Controllers
 
         [HttpPost]
         [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(GetBookingsResponse))]
+        [SwaggerResponse((int)HttpStatusCode.BadRequest, Type = typeof(GetBookingsResponse))]
         [Route("/AddBookings")]
         public async Task<IActionResult> AddBooking([FromForm] Booking booking)
         {
@@ -64,6 +66,7 @@ namespace RoomBooking.Controllers
 
         [HttpPut]
         [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(GetBookingsResponse))]
+        [SwaggerResponse((int)HttpStatusCode.NotFound, Type = typeof(GetBookingsResponse))]
         [Route("/EditBookings")]
         public async Task<IActionResult> EditBooking([FromForm] Booking booking)
         {

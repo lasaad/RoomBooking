@@ -33,6 +33,7 @@ namespace RoomBooking.Controllers
 
         [HttpGet]
         [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(GetUsersResponse))]
+        [SwaggerResponse((int)HttpStatusCode.BadRequest, Type = typeof(GetUsersResponse))]
         [Route("/GetUsers/{id}")]
         public async Task<IActionResult> GetUser(int id)
         {
@@ -49,6 +50,7 @@ namespace RoomBooking.Controllers
 
         [HttpPost]
         [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(GetUsersResponse))]
+        [SwaggerResponse((int)HttpStatusCode.BadRequest, Type = typeof(GetUsersResponse))]
         [Route("/AddUsers")]
         public async Task<IActionResult> AddUser([FromForm] User user)
         {
@@ -59,11 +61,12 @@ namespace RoomBooking.Controllers
                     return Ok(result);
             }
 
-            returnreturn BadRequest(ModelState);
+            return BadRequest(ModelState);
         }
 
         [HttpPut]
         [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(GetUsersResponse))]
+        [SwaggerResponse((int)HttpStatusCode.NotFound, Type = typeof(GetUsersResponse))]
         [Route("/EditUsers")]
         public async Task<IActionResult> EditUser([FromForm] User user)
         {
@@ -84,6 +87,7 @@ namespace RoomBooking.Controllers
 
         [HttpDelete]
         [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(GetUsersResponse))]
+        [SwaggerResponse((int)HttpStatusCode.NotFound, Type = typeof(GetUsersResponse))]
         [Route("DeleteUsers/{id}")]
         public async Task<IActionResult> DeleteUser(int id)
         {

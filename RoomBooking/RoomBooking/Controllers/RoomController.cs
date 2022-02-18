@@ -33,6 +33,7 @@ namespace RoomBooking.Controllers
 
         [HttpGet]
         [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(GetRoomsResponse))]
+        [SwaggerResponse((int)HttpStatusCode.NotFound, Type = typeof(GetRoomsResponse))]
         [Route("/GetRooms/{id}")]
         public async Task<IActionResult> GetRoom(int id)
         {
@@ -49,6 +50,7 @@ namespace RoomBooking.Controllers
 
         [HttpPost]
         [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(GetRoomsResponse))]
+        [SwaggerResponse((int)HttpStatusCode.BadRequest, Type = typeof(GetRoomsResponse))]
         [Route("/AddRooms")]
         public async Task<IActionResult> AddRoom([FromForm] Room room)
         {
@@ -64,6 +66,7 @@ namespace RoomBooking.Controllers
 
         [HttpPut]
         [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(GetRoomsResponse))]
+        [SwaggerResponse((int)HttpStatusCode.NotFound, Type = typeof(GetRoomsResponse))]
         [Route("/EditRooms")]
         public async Task<IActionResult> EditRoom([FromForm] Room room)
         {
@@ -84,6 +87,7 @@ namespace RoomBooking.Controllers
 
         [HttpDelete]
         [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(GetRoomsResponse))]
+        [SwaggerResponse((int)HttpStatusCode.NotFound, Type = typeof(GetRoomsResponse))]
         [Route("DeleteRooms/{id}")]
         public async Task<IActionResult> DeleteRoom(int id)
         {

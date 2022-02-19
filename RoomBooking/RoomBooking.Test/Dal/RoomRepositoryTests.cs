@@ -1,15 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using RoomBooking.Dal;
 using RoomBooking.Dal.DataAccess;
 using RoomBooking.Dal.Models;
-using RoomBooking.Dal.Repositories;
 using RoomBooking.Domain.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RoomBooking.Test.Dal
 {

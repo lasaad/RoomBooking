@@ -73,6 +73,7 @@ namespace RoomBooking.Test.Domain
         }
 
         [TestMethod]
+        [Ignore]
         public async Task Should_Return_Available_Slot()
         {
             //Arrange

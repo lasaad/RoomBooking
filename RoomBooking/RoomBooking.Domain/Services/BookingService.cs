@@ -17,9 +17,24 @@ namespace RoomBooking.Domain.Services
             _bookingRepository = bookingRepository;
         }
 
-        public async Task<int> AddBookingAsync(Booking booking)
+        public async Task<BookingResponse> AddBookingAsync(Booking booking)
         {
-            return await _bookingRepository.AddBookingsAsync(booking);
+            BookingResponse result = new BookingResponse();
+            var bookings = (await _bookingRepository.GetBookingsByRoomAndDayAsync(booking.Date, booking.RoomId))
+                .Select(b => b.StartSlot)
+                .OrderBy(b => b)
+                .ToList();
+
+            if (bookings.Contains(booking.StartSlot))
+            {
+                List<int> availableSlots = await GetAvailableSlot(booking.Date, booking.RoomId);
+                return new BookingResponse() { AvailableHours = availableSlots, IsAvailable = false };
+            }
+            else
+            {
+                await _bookingRepository.AddBookingsAsync(booking);
+                return new BookingResponse() { AvailableHours = null, IsAvailable = true };
+            }
         }
 
         public async Task<int> DeleteBookingAsync(int id)
@@ -42,58 +57,16 @@ namespace RoomBooking.Domain.Services
             return await _bookingRepository.GetBookingsAsync();
         }
 
-        public async Task<List<(int, int)>> GetAvailableSlot(DateTime day, int room)
+        public async Task<List<int>> GetAvailableSlot(DateTime day, int room)
         {
             List<(int, int)> result = new List<(int, int)>();
-            var bookings = (await _bookingRepository.GetBookingsByRoomAndDayAsync(day, room)).OrderBy(b => b.StartSlot).ToList();
-            int?[] slots = new int?[24];
-            (int, int) availableSlot = (-1, -1);
+            var bookings = (await _bookingRepository.GetBookingsByRoomAndDayAsync(day, room)).Select(b => b.StartSlot)
+                .OrderBy(b => b)
+                .ToList();
+            List<int> hours = new List<int> {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23 };
 
-            foreach (var slot in bookings)
-            {
-                for (int i = slot.StartSlot; i < slot.EndSlot + 1; i++)
-                {
-                    slots[i] = i;
-                }
-            }
+            return hours.Where(b => !bookings.Contains(b)).ToList();
 
-            for (int i = 0; i < slots.Length; i++)
-            {
-                if (availableSlot == (-1, -1))
-                {
-                    if (slots[i] == null)
-                    {
-                        availableSlot = (i, -1);
-                    }
-                    else
-                    {
-                        continue;
-                    }
-
-                }
-                else
-                {
-                    if (slots[i] == null)
-                    {
-                        continue;
-                    }
-                    else
-                    {
-                        availableSlot = (availableSlot.Item1, i);
-                        result.Add(availableSlot);
-                        availableSlot = (-1, -1);
-                        
-                    }
-                }
-            }
-
-            if(availableSlot != (-1,-1))
-            {
-                availableSlot = (availableSlot.Item1, slots.Length);
-                result.Add(availableSlot);
-            }
-
-            return result;
         }
     }
 }

@@ -71,7 +71,7 @@ namespace RoomBooking.Controllers
         [HttpPut]
         [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(GetUsersResponse))]
         [SwaggerResponse((int)HttpStatusCode.NotFound, Type = typeof(NotFoundObjectResult))]
-        [SwaggerResponse((int)HttpStatusCode.BadRequest, Type = typeof(NotFoundObjectResult))]
+        [SwaggerResponse((int)HttpStatusCode.BadRequest, Type = typeof(BadRequestObjectResult))]
         [Route("/Users")]
         public async Task<IActionResult> EditUser([FromBody] User user)
         {

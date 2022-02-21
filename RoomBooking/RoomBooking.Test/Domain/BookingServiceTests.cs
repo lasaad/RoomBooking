@@ -6,6 +6,7 @@ using NSubstitute;
 using RoomBooking.Domain.Interfaces.Repositories;
 using RoomBooking.Domain.Models;
 using BookingService = RoomBooking.Domain.Services.BookingService;
+using System.Linq;
 
 namespace RoomBooking.Test.Domain
 {
@@ -49,15 +50,104 @@ namespace RoomBooking.Test.Domain
         }
 
         [TestMethod]
-        public async Task Should_Create_Booking()
+        public async Task Should_Create_Booking_Ok()
         {
+            List<int> availableSlotsExpected = null;
+            BookingResponse expected = new BookingResponse { IsAvailable = true, AvailableHours = availableSlotsExpected };
+
             var bookingRepository = Substitute.For<IBookingRepository>();
             bookingRepository.AddBookingsAsync(new Booking()).Returns(0);
 
             var service = new BookingService(bookingRepository);
             var result = await service.AddBookingAsync(new Booking());
 
-            Assert.AreEqual(result, 0);
+            Assert.AreEqual(expected.AvailableHours, result.AvailableHours);
+            Assert.AreEqual(expected.IsAvailable, result.IsAvailable);
+        }
+
+        [TestMethod]
+        [Ignore]
+        public async Task Should_GetAvailableSlot_OneBookingInDay_FirstHour()
+        {
+            List<int> availableSlotsExpected = new List<int> { 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23 };
+            BookingResponse expected = new BookingResponse { IsAvailable = true, AvailableHours = availableSlotsExpected };
+
+            var bookingRepository = Substitute.For<IBookingRepository>();
+            bookingRepository.AddBookingsAsync(new Booking()).Returns(0);
+
+            var service = new BookingService(bookingRepository);
+            var result = await service.AddBookingAsync(new Booking());
+
+            Assert.AreEqual(expected.AvailableHours, result.AvailableHours);
+            Assert.AreEqual(expected.IsAvailable, result.IsAvailable);
+        }
+
+        [TestMethod]
+        [Ignore]
+        public async Task Should_GetAvailableSlot_OneBookingInDay_LastHour()
+        {
+            List<int> availableSlotsExpected = new List<int> { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19};
+            BookingResponse expected = new BookingResponse { IsAvailable = true, AvailableHours = availableSlotsExpected };
+
+            var bookingRepository = Substitute.For<IBookingRepository>();
+            bookingRepository.AddBookingsAsync(new Booking()).Returns(0);
+
+            var service = new BookingService(bookingRepository);
+            var result = await service.AddBookingAsync(new Booking());
+
+            Assert.AreEqual(expected.AvailableHours, result.AvailableHours);
+            Assert.AreEqual(expected.IsAvailable, result.IsAvailable);
+        }
+
+        [TestMethod]
+        public async Task Should_GetAvailableSlot_OneBookingInDayOneHour()
+        {
+            List<int> availableSlotsExpected = new List<int> { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23};
+            BookingResponse expected = new BookingResponse { IsAvailable = false, AvailableHours = availableSlotsExpected };
+
+            var bookingRepository = Substitute.For<IBookingRepository>();
+            bookingRepository.AddBookingsAsync(new Booking()).Returns(0);
+            bookingRepository.GetBookingsByRoomAndDayAsync(default, default).Returns(new List<Booking> { new Booking() { StartSlot = 12, EndSlot = 0 }});
+
+            var service = new BookingService(bookingRepository);
+            var result = await service.AddBookingAsync(new Booking() { StartSlot = 12});
+
+            Assert.AreEqual(true, expected.AvailableHours.SequenceEqual(result.AvailableHours));
+            Assert.AreEqual(expected.IsAvailable, result.IsAvailable);
+        }
+
+        [TestMethod]
+        [Ignore]
+        public async Task Should_GetAvailableSlot_OneBookingInDayTwoHour()
+        {
+            List<int> availableSlotsExpected = new List<int> { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23 };
+            BookingResponse expected = new BookingResponse { IsAvailable = true, AvailableHours = availableSlotsExpected };
+
+            var bookingRepository = Substitute.For<IBookingRepository>();
+            bookingRepository.AddBookingsAsync(new Booking()).Returns(0);
+
+            var service = new BookingService(bookingRepository);
+            var result = await service.AddBookingAsync(new Booking());
+
+            Assert.AreEqual(expected.AvailableHours, result.AvailableHours);
+            Assert.AreEqual(expected.IsAvailable, result.IsAvailable);
+        }
+
+        [TestMethod]
+        [Ignore]
+        public async Task Should_GetAvailableSlot_MultipleBookingDay()
+        {
+            List<int> availableSlotsExpected = new List<int> { 0, 1, 2, 3, 4, 5, 8, 9, 10, 11, 13, 14, 15, 16, 17, 18, 22, 23 };
+            BookingResponse expected = new BookingResponse { IsAvailable = true, AvailableHours = availableSlotsExpected };
+
+            var bookingRepository = Substitute.For<IBookingRepository>();
+            bookingRepository.AddBookingsAsync(new Booking()).Returns(0);
+
+            var service = new BookingService(bookingRepository);
+            var result = await service.AddBookingAsync(new Booking());
+
+            Assert.AreEqual(expected.AvailableHours, result.AvailableHours);
+            Assert.AreEqual(expected.IsAvailable, result.IsAvailable);
         }
 
         [TestMethod]

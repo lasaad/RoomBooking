@@ -53,19 +53,11 @@ namespace RoomBooking.Controllers
         [Route("/Bookings")]
         public async Task<IActionResult> AddBooking([FromBody] Booking booking)
         {
+            BookingResponse result = await bookingService.AddBookingAsync(booking).ConfigureAwait(false);
             if (ModelState.IsValid)
-            {
-                int result = await bookingService.AddBookingAsync(booking).ConfigureAwait(false);
-                if (result > 0)
-                    return Ok(result);
-                else
-                {
-                    logger.Error("Erreur lors de l'ajout de la ressouce {id}", booking.Id);
-                    BadRequest(ModelState);
-                }
-            }
+                return Ok(result);
 
-            return BadRequest(ModelState);
+            return BadRequest(result);
         }
 
         [HttpPut]

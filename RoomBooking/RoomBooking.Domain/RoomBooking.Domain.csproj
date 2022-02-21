@@ -54,6 +54,7 @@
     <Compile Include="Interfaces\Services\IUserService.cs" />
     <Compile Include="Interfaces\Services\IValueService.cs" />
     <Compile Include="Models\Booking.cs" />
+    <Compile Include="Models\BookingResponse.cs" />
     <Compile Include="Models\Room.cs" />
     <Compile Include="Models\Value.cs" />
     <Compile Include="Models\User.cs" />

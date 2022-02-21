@@ -1,4 +1,3 @@
-using RoomBooking.Api.Services;
 using Microsoft.EntityFrameworkCore;
 using KataHotelContext = RoomBooking.Dal.Models.KataHotelContext;
 using RoomBooking.Dal.DataAccess;
@@ -7,6 +6,7 @@ using RoomBooking.Domain.Interfaces.Repositories;
 using RoomBooking.Domain.Interfaces.Services;
 using RoomBooking.Dal.Repositories;
 using Serilog;
+using RoomBooking.Domain.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 

@@ -4,7 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NSubstitute;
 using RoomBooking.Domain.Interfaces.Repositories;
 using RoomBooking.Domain.Models;
-using RoomService = RoomBooking.Api.Services.RoomService;
+using RoomBooking.Domain.Services;
 
 namespace RoomBooking.Test.Domain
 {

@@ -34,7 +34,7 @@ namespace RoomBooking.Controllers
         [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(GetRoomsResponse))]
         [SwaggerResponse((int)HttpStatusCode.NotFound, Type = typeof(NotFoundObjectResult))]
         [Route("/Rooms/{id}")]
-        public async Task<IActionResult> GetRoom(int id)
+        public async Task<IActionResult> GetRoom([FromQuery] int id)
         {
             Room result = await roomService.GetRoomAsync(id).ConfigureAwait(false);
 
@@ -51,7 +51,7 @@ namespace RoomBooking.Controllers
         [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(GetRoomsResponse))]
         [SwaggerResponse((int)HttpStatusCode.BadRequest, Type = typeof(BadRequestObjectResult))]
         [Route("/Rooms")]
-        public async Task<IActionResult> AddRoom([FromForm] Room room)
+        public async Task<IActionResult> AddRoom([FromBody] Room room)
         {
             if (ModelState.IsValid)
             {
@@ -73,7 +73,7 @@ namespace RoomBooking.Controllers
         [SwaggerResponse((int)HttpStatusCode.NotFound, Type = typeof(NotFoundObjectResult))]
         [SwaggerResponse((int)HttpStatusCode.BadRequest, Type = typeof(BadRequestObjectResult))]
         [Route("/Rooms")]
-        public async Task<IActionResult> EditRoom([FromForm] Room room)
+        public async Task<IActionResult> EditRoom([FromBody] Room room)
         {
             if (ModelState.IsValid)
             {
@@ -94,7 +94,7 @@ namespace RoomBooking.Controllers
         [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(GetRoomsResponse))]
         [SwaggerResponse((int)HttpStatusCode.NotFound, Type = typeof(NotFoundObjectResult))]
         [Route("/Rooms/{id}")]
-        public async Task<IActionResult> DeleteRoom(int id)
+        public async Task<IActionResult> DeleteRoom([FromQuery] int id)
         {
             int result = await roomService.DeleteRoomAsync(id).ConfigureAwait(false);
 

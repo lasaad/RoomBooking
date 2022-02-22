@@ -4,6 +4,6 @@
     {
         public bool IsAvailable { get; set; }
 
-        public List<int> AvailableHours { get; set; }
+        public IEnumerable<int> AvailableHours { get; set; }
     }
 }

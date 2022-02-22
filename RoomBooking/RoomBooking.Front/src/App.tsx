@@ -6,7 +6,7 @@ import Rooms from "./components/Rooms";
 function App() {
   return (
     <div className="App">
-      <Provider store={store()}>
+      <Provider store={store}>
         <Rooms />
       </Provider>
     </div>

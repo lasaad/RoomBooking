@@ -18,7 +18,7 @@ export type RootActions = RoomAction;
 
 const sagaMiddleware = createSagaMiddleware();
 
-export const store = (): any => {
+const configureStore = (): any => {
     const store = createStore(
         rootReducer,
         composeWithDevTools(
@@ -28,3 +28,5 @@ export const store = (): any => {
     initSagas(sagaMiddleware);
     return store;
 };
+
+export const store = configureStore();

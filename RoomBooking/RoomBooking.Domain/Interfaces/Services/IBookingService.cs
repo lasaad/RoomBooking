@@ -12,6 +12,6 @@ namespace RoomBooking.Domain.Interfaces.Services
         Task<int> EditBookingAsync(Booking booking);
         Task<BookingResponse> AddBookingAsync(Booking booking);
         Task<int> DeleteBookingAsync(int id);
-        Task<List<int>> GetAvailableSlot(DateTime day, int room);
+        Task<List<int>> GetAvailableSlot(DateTime day, int room, List<Booking> furtherElement);
     }
 }

@@ -65,14 +65,13 @@ namespace RoomBooking.Test.Api
         [TestMethod]
         public async Task Should_Create_Booking()
         {
-            Booking booking = new();
             IBookingService bookingService = Substitute.For<IBookingService>();
             ILogger loggerService = Substitute.For<ILogger>();
 
-            bookingService.GetBookingAsync(0).Returns(booking);
+            bookingService.AddBookingAsync(default).ReturnsForAnyArgs(new BookingResponse());
 
             BookingController controller = new BookingController(bookingService, loggerService);
-            IActionResult response = await controller.AddBooking(booking);
+            IActionResult response = await controller.AddBooking(new Booking());
 
             Assert.IsNotNull(response);
             Assert.IsInstanceOfType(response, typeof(IActionResult));

@@ -48,16 +48,23 @@ namespace RoomBooking.Controllers
         }
 
         [HttpPost]
-        [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(GetBookingsResponse))]
+        [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(PostBookingResponse))]
         [SwaggerResponse((int)HttpStatusCode.BadRequest, Type = typeof(BadRequestObjectResult))]
         [Route("/Bookings")]
         public async Task<IActionResult> AddBooking([FromBody] Booking booking)
         {
             BookingResponse result = await bookingService.AddBookingAsync(booking).ConfigureAwait(false);
-            if (ModelState.IsValid)
-                return Ok(result);
 
-            return BadRequest(result);
+            var response = new PostBookingResponse
+            {
+                IsAvailable = result.IsAvailable,
+                AvailableHours = result.AvailableHours
+            };
+
+            if (ModelState.IsValid)
+                return Ok(response);
+
+            return BadRequest(response);
         }
 
         [HttpPut]

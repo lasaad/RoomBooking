@@ -53,7 +53,7 @@ builder.Services.AddDbContext<KataHotelContext>(options => options.UseSqlServer(
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("MyOrigin",
-        builder => builder.WithOrigins("http://localhost:3000")
+        builder => builder.AllowAnyOrigin()
                           .AllowAnyMethod()
                           .AllowAnyHeader());
 });

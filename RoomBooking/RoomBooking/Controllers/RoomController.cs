@@ -27,7 +27,11 @@ namespace RoomBooking.Controllers
         public async Task<IActionResult> GetRooms()
         {
             IEnumerable<Room> result = await roomService.GetRoomsAsync().ConfigureAwait(false);
-            return Ok(result);
+            var r = new GetRoomsResponse()
+            {
+                Rooms = result.Select(s => new RoomDto { Id = s.Id, Name = s.Name})
+            };
+            return Ok(r);
         }
 
         [HttpGet]

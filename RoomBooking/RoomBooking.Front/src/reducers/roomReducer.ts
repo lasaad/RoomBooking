@@ -16,6 +16,8 @@ export const roomReducer: Reducer<RoomState, RoomAction> = (
 ) => {
     switch (action.type) {
         case "FETCH_ROOMS_SUCCESS":
+            // state.rooms = action.payload;
+            // return state;
             return {
                 ...state,
                 rooms: action.payload

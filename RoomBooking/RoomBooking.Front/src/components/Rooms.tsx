@@ -9,7 +9,7 @@ const Rooms: React.FC = () => {
         dispatch({ type: "FETCH_ROOMS" });
     }, []);
 
-    const rooms = useSelector((state: RootState) => state.room.rooms);
+    const rooms = useSelector((state: RootState) => state.room.rooms); // lis dans le store
 
     if (!rooms) {
         return <></>;

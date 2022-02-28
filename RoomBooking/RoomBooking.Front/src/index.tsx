@@ -4,11 +4,10 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Rooms from "./routes/rooms";
-import Users from "./routes/users";
+import Rooms from './components/Rooms';
+import Users from './components/Users';
 
 ReactDOM.render(
-
   <BrowserRouter>
     <Routes>
     <Route path="/" element={<App />}>

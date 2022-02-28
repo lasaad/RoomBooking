@@ -4,16 +4,16 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Expenses from "./routes/expenses";
-import Invoices from "./routes/invoices";
+import Rooms from "./routes/rooms";
+import Users from "./routes/users";
 
 ReactDOM.render(
 
   <BrowserRouter>
     <Routes>
     <Route path="/" element={<App />}>
-        <Route path="expenses" element={<Expenses />} />
-        <Route path="invoices" element={<Invoices />} />
+        <Route path="rooms" element={<Rooms />} />
+        <Route path="users" element={<Users />} />
       </Route>
     </Routes>
   </BrowserRouter>,

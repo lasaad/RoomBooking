@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Rooms from './components/Rooms';
 import Users from './components/Users';
+import Bookings from './components/Bookings';
 
 ReactDOM.render(
   <BrowserRouter>
@@ -13,6 +14,7 @@ ReactDOM.render(
     <Route path="/" element={<App />}>
         <Route path="rooms" element={<Rooms />} />
         <Route path="users" element={<Users />} />
+        <Route path="bookings" element={<Bookings />} />
       </Route>
     </Routes>
   </BrowserRouter>,

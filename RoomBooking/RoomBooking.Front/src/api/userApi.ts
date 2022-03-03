@@ -9,3 +9,10 @@ export const fetchUsers = async (): Promise<User[]> => {
         lastName: r.lastName
     }));
 };
+
+export const postUser = async (user: User): Promise<number> => {
+    const response = await client.post("/Users", {
+        ...user
+    });
+    return response.data; // TODO: return data because Id not encapsulated in a clean object
+};

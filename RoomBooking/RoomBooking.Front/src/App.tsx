@@ -15,6 +15,8 @@ function App() {
         >
           <Link to="/users">Users</Link> 
           |{" "}
+          <Link to="/user">Create user</Link> 
+          |{" "}
           <Link to="/rooms">Rooms</Link>
           |{" "}
           <Link to="/bookings">Bookings</Link>

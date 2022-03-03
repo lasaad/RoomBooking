@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Rooms from './components/Rooms';
 import Users from './components/Users';
 import Bookings from './components/Bookings';
+import User from './components/User';
 
 ReactDOM.render(
   <BrowserRouter>
@@ -14,6 +15,7 @@ ReactDOM.render(
     <Route path="/" element={<App />}>
         <Route path="rooms" element={<Rooms />} />
         <Route path="users" element={<Users />} />
+        <Route path="user" element={<User />} />
         <Route path="bookings" element={<Bookings />} />
       </Route>
     </Routes>

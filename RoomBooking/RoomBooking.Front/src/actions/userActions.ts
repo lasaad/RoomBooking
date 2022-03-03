@@ -13,11 +13,24 @@ type FetchUsersFail = {
     type: "FETCH_USERS_FAIL";
 };
 
-export const fetchUsers = (): FetchUsers => ({
-    type: "FETCH_USERS"
-});
+export type CreateUser = {
+    type: "CREATE_USER";
+    payload: User;
+};
+
+type CreateUserSuccess = {
+    type: "CREATE_USER_SUCCESS";
+    payload: number;
+};
+
+type CreateUserFail = {
+    type: "CREATE_USER_FAIL";
+};
 
 export type UserAction =
     FetchUsers
     | FetchUsersSuccess
-    | FetchUsersFail;
+    | FetchUsersFail
+    | CreateUser
+    | CreateUserSuccess
+    | CreateUserFail;

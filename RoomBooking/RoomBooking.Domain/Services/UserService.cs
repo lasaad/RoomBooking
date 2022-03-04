@@ -15,7 +15,8 @@ namespace RoomBooking.Domain.Services
 
         public async Task<int> AddUserAsync(User user)
         {
-            return await _userRepository.AddUserAsync(user);
+            var a = await _userRepository.AddUserAsync(user);
+            return a;
         }
 
         public async Task<int> DeleteUserAsync(int id)

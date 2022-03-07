@@ -13,6 +13,20 @@ type FetchUsersFail = {
     type: "FETCH_USERS_FAIL";
 };
 
+type FetchUser = {
+    type: "FETCH_USER";
+    payload: number
+};
+
+type FetchUserSuccess = {
+    type: "FETCH_USER_SUCCESS";
+    payload: User;
+};
+
+type FetchUserFail = {
+    type: "FETCH_USER_FAIL";
+};
+
 export type CreateUser = {
     type: "CREATE_USER";
     payload: User;
@@ -27,10 +41,30 @@ type CreateUserFail = {
     type: "CREATE_USER_FAIL";
 };
 
+export type UpdateUser = {
+    type: "UPDATE_USER";
+    payload: User;
+};
+
+type UpdateUserSuccess = {
+    type: "UPDATE_USER_SUCCESS";
+    payload: number;
+};
+
+type UpdateUserFail = {
+    type: "UPDATE_USER_FAIL";
+};
+
 export type UserAction =
     FetchUsers
     | FetchUsersSuccess
     | FetchUsersFail
+    | FetchUser
+    | FetchUserSuccess
+    | FetchUserFail
     | CreateUser
     | CreateUserSuccess
-    | CreateUserFail;
+    | CreateUserFail
+    | UpdateUser
+    | UpdateUserSuccess
+    | UpdateUserFail;

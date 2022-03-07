@@ -1,10 +1,6 @@
 import { BookingAction } from "../actions/bookingActions";
 import { Reducer } from "redux";
-import { Booking } from "../domain/Booking";
-
-export interface BookingState {
-    bookings: Booking[];
-}
+import BookingState from "../states/BookingState";
 
 const initialState: BookingState = {
     bookings: []

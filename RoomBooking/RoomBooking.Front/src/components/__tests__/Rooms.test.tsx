@@ -1,13 +1,12 @@
-import React from "react";
 import * as redux from "react-redux"
 import Enzyme, { mount } from "enzyme";
 import Adapter from "@wojtekmaj/enzyme-adapter-react-17";
 import configureStore from "redux-mock-store";
-import Rooms from "../Rooms";
+import Rooms from "../room/Rooms";
 
 Enzyme.configure({ adapter: new Adapter() });
 
-let useDispatchSpy;
+let useDispatchSpy: any;
 
 beforeEach(() => {
     const useSelectorSpy = jest.spyOn(redux, "useSelector");

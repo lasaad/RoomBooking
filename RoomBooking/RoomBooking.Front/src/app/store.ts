@@ -1,13 +1,14 @@
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import createSagaMiddleware from "redux-saga"
-import { roomReducer, RoomState } from "../reducers/roomReducer";
-import { userReducer, UserState } from "../reducers/userReducer";
-import { bookingReducer, BookingState } from "../reducers/bookingReducer";
-
-import { RoomAction } from "../actions/roomActions";
+import { roomReducer } from "../reducers/roomReducer";
+import { userReducer } from "../reducers/userReducer";
+import { bookingReducer } from "../reducers/bookingReducer";
 import { BookingAction } from "../actions/bookingActions";
 import { initSagas } from "../sagas/rootSaga"
+import RoomState from "../states/RoomState";
+import UserState from "../states/UserState";
+import BookingState from "../states/BookingState";
 
 export interface RootState {
     readonly room: RoomState;

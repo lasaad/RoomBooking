@@ -3,7 +3,6 @@ import { Booking } from "../domain/Booking";
 
 export const fetchBookings = async (): Promise<Booking[]> => {
     const response = await client.get("/Bookings");
-    console.log(response)
     let a =  response.data.bookings.map((r: Booking) => ({
         id: r.id,
         roomId: r.roomId,
@@ -13,4 +12,11 @@ export const fetchBookings = async (): Promise<Booking[]> => {
         date: r.date
     }));
     return a;
+};
+
+export const postBooking = async (booking: Booking): Promise<number> => {
+    const response = await client.post("/Bookings", {
+        ...booking
+    });
+    return response.data;
 };

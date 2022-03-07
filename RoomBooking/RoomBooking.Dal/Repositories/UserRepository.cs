@@ -14,7 +14,10 @@ namespace RoomBooking.Dal.DataAccess
         public UserRepository(KataHotelContext context)
         {
             _context = context;
-            _mapper = new MapperConfiguration(cfg => cfg.CreateMap<UserEntity, User>());
+            _mapper = new MapperConfiguration(cfg => {
+                cfg.CreateMap<User, UserEntity>();
+                cfg.CreateMap<UserEntity,User>();
+            } /*cfg.CreateMap<User, UserEntity>()*/);
         }
 
         public async Task<User> GetUserAsync(int id)
@@ -39,7 +42,7 @@ namespace RoomBooking.Dal.DataAccess
         {
             Mapper mapper = new(_mapper);
 
-            UserEntity userDTO = mapper.Map<UserEntity>(user);
+            UserEntity userDTO = mapper.Map<User, UserEntity>(user);
             UserEntity? userToEdit = await _context.Users.Where(b => b.Id == userDTO.Id).FirstOrDefaultAsync().ConfigureAwait(false);
 
             if (userToEdit != null)
@@ -50,11 +53,21 @@ namespace RoomBooking.Dal.DataAccess
 
         public async Task<int> AddUserAsync(User user)
         {
-            Mapper mapper = new(_mapper);
-            UserEntity userEntity = mapper.Map<UserEntity>(user);
-            await _context.Users.AddAsync(userEntity).ConfigureAwait(false);
+            try
+            {
+                Mapper mapper = new(_mapper);
+                UserEntity userEntity = new UserEntity();
+                userEntity = mapper.Map<User, UserEntity>(user);
+                await _context.Users.AddAsync(userEntity).ConfigureAwait(false);
 
+            }
+            catch (Exception e)
+            {
+                var a = e;
+                
+            }
             return _context.SaveChanges();
+
         }
 
         public async Task<int> DeleteUserAsync(int id)

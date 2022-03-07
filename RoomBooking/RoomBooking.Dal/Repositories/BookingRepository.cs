@@ -14,7 +14,10 @@ namespace RoomBooking.Dal.Repository
         public BookingRepository(KataHotelContext context)
         {
             _context = context;
-            _mapper = new MapperConfiguration(cfg => cfg.CreateMap<BookingEntity, Booking>());
+            _mapper = new MapperConfiguration(cfg => {
+                cfg.CreateMap<Booking, BookingEntity>();
+                cfg.CreateMap<BookingEntity, Booking>();
+            });
         }
 
         public async Task<Booking> GetBookingAsync(int id)

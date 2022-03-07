@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using KataHotelContext = RoomBooking.Dal.Models.KataHotelContext;
+using RoomBooking.Dal.Models;
 using RoomBooking.Dal.DataAccess;
 using RoomBooking.Dal.Repository;
 using RoomBooking.Domain.Interfaces.Repositories;

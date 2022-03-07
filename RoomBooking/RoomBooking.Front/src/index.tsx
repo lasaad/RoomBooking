@@ -7,6 +7,7 @@ import Users from './components/Users';
 import Bookings from './components/Bookings';
 import User from './components/User';
 import Room from './components/room/Room';
+import Booking from './components/Booking';
 
 ReactDOM.render(
   <BrowserRouter>
@@ -16,6 +17,7 @@ ReactDOM.render(
         <Route path="users" element={<Users />} />
         <Route path="user" element={<User />} />
         <Route path="bookings" element={<Bookings />} />
+        <Route path="booking" element={<Booking />} />
       </Route>
     </Routes>
   </BrowserRouter>,

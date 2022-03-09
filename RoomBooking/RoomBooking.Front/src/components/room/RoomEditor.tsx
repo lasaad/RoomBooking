@@ -5,17 +5,17 @@ import { RootState } from "../../app/store";
 
 const RoomEditor: React.FC = () => {
     const dispatch = useDispatch();
-    const currentRoom = useSelector((state: RootState) => !_.isNil(state.room.currentRoom) ? state.room.currentRoom : {
-        id: 0,
-        name: ""
-    });
+    const currentRoom = useSelector((state: RootState) => state.room.currentRoom);
 
-    const [id, setId] = React.useState(currentRoom.id);
-    const [name, setName] = React.useState(currentRoom.name);
+    const currentRoomId = _.isNil(currentRoom) ? 0 : currentRoom.id;
+    const currentRoomName = _.isNil(currentRoom) ? "" : currentRoom.name;
+
+    const [id, setId] = React.useState(currentRoomId);
+    const [name, setName] = React.useState(currentRoomName);
 
     useEffect(() => {
-        setId(currentRoom.id);
-        setName(currentRoom.name);
+        setId(currentRoomId);
+        setName(currentRoomName);
     }, [currentRoom]);
 
     const saveRoom = () => {

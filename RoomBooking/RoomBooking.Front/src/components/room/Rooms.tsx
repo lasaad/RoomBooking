@@ -16,7 +16,7 @@ const Rooms: React.FC = () => {
     }
 
     const roomStyle = {
-        height: "100px",
+        height: "300px",
         width: "800px",
         margin: "5px auto",
         border: "solid 1px"

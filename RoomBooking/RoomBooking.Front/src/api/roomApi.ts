@@ -14,8 +14,8 @@ export const getRooms = async (): Promise<Room[]> => {
 export const getRoom = async (id: number): Promise<Room> => {
     const response = await client.get(`/Rooms/${id}`);
     return {
-        id: response.data.room.id,
-        name: response.data.room.name
+        id: response.data.id,
+        name: response.data.name
     };
 };
 
@@ -31,5 +31,5 @@ export const putRoom = async (room: Room): Promise<void> => {
         id: room.id,
         name: room.name
     };
-    await client.put(`/Rooms/${room.id}`, request);
+    await client.put(`/Rooms`, request);
 };

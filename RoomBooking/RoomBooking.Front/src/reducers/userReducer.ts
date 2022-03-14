@@ -37,6 +37,12 @@ export const userReducer: Reducer<UserState, UserAction> = (
                 isLoading: false,
                 currentUser: action.payload
             };
+        case "OPEN_USER_EDITOR":
+                return {
+                    ...state,
+                    currentRoom: undefined,
+                    isOpen: true
+                };
         case "CREATE_USER":
         case "UPDATE_USER":
             return {

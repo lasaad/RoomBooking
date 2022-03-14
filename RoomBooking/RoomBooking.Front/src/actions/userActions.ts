@@ -41,6 +41,10 @@ type CreateUserFail = {
     type: "CREATE_USER_FAIL";
 };
 
+type OpenUserEditor = {
+    type: "OPEN_USER_EDITOR";
+};
+
 export type UpdateUser = {
     type: "UPDATE_USER";
     payload: User;
@@ -62,6 +66,7 @@ export type UserAction =
     | FetchUser
     | FetchUserSuccess
     | FetchUserFail
+    | OpenUserEditor
     | CreateUser
     | CreateUserSuccess
     | CreateUserFail

@@ -16,10 +16,11 @@ const Users: React.FC = () => {
     }
 
     return <div>
-        {users.map((r) =>
-            <div key={r.id} className="room-item">
-                <button onClick={() => dispatch({ type: "FETCH_USER", payload: { id: r.id } })}>{r.id}</button> - {r.firstName} - {r.lastName}
-            </div>)
+        {
+            users.map((r) =>
+                <div key={r.id} className="user-item">
+                    <button onClick={() => dispatch({ type: "FETCH_USER", payload: r.id })}>{r.id}</button> - {r.firstName} - {r.lastName}
+                </div>)
         }
     </div>
 };

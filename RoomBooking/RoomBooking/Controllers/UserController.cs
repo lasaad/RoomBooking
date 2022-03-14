@@ -38,7 +38,7 @@ namespace RoomBooking.Controllers
         [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(GetUsersResponse))]
         [SwaggerResponse((int)HttpStatusCode.BadRequest, Type = typeof(BadRequestObjectResult))]
         [Route("/Users/{id}")]
-        public async Task<IActionResult> GetUser([FromQuery]int id)
+        public async Task<IActionResult> GetUser([FromRoute]int id)
         {
             User result = await userService.GetUserAsync(id).ConfigureAwait(false);
 

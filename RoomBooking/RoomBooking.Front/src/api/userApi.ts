@@ -20,7 +20,11 @@ export const postUser = async (user: User): Promise<number> => {
 
 export const fetchUser = async (id: number): Promise<User> => {
     const response = await client.get(`/Users/${id}`);
-        return response.data.id
+    return {
+        id: response.data.id,
+        firstName: response.data.firstName,
+        lastName: response.data.lastName
+    };
 };
 
 export const putUser = async (user: User): Promise<void> => {

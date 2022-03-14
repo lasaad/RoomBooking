@@ -3,18 +3,16 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Users from './components/Users';
 import Bookings from './components/Bookings';
-import User from './components/User';
 import Room from './components/room/Room';
 import Booking from './components/Booking';
+import User from './components/user/User';
 
 ReactDOM.render(
   <BrowserRouter>
     <Routes>
     <Route path="/" element={<App />}>
         <Route path="room" element={<Room />} />
-        <Route path="users" element={<Users />} />
         <Route path="user" element={<User />} />
         <Route path="bookings" element={<Bookings />} />
         <Route path="booking" element={<Booking />} />

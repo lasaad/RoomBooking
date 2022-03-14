@@ -23,9 +23,9 @@ const UserEditor: React.FC = () => {
 
     const saveUser = () => {
         if (id === 0) {
-            dispatch({ type: "CREATE_USER", payload: { id, currentUserFirstName, currentUserLastName } });
+            dispatch({ type: "CREATE_USER", payload: { id, firstName, lastName } });
         } else {
-            dispatch({ type: "UPDATE_USER", payload: {  id, currentUserFirstName, currentUserLastName } });
+            dispatch({ type: "UPDATE_USER", payload: { id, firstName, lastName } });
         }
     };
 

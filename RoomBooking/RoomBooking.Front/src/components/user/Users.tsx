@@ -31,8 +31,6 @@ const Users: React.FC = () => {
         <div>
             <button onClick={() => dispatch({ type: "OPEN_USER_EDITOR" })}>New user</button>
         </div>
-        <div>sjdfkj
-        </div>
     </div>
 };
 

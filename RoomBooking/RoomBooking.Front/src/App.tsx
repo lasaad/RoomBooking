@@ -13,9 +13,7 @@ function App() {
             paddingBottom: "1rem",
           }}
         >
-          <Link to="/users">Users</Link> 
-          |{" "}
-          <Link to="/user">Create user</Link> 
+          <Link to="/user">Users</Link> 
           |{" "}
           <Link to="/room">Rooms</Link>
           |{" "}

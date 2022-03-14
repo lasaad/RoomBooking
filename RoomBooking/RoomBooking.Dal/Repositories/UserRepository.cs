@@ -40,15 +40,17 @@ namespace RoomBooking.Dal.DataAccess
 
         public async Task<int> EditUserAsync(User user)
         {
-            Mapper mapper = new(_mapper);
-
-            UserEntity userDTO = mapper.Map<User, UserEntity>(user);
-            UserEntity? userToEdit = await _context.Users.Where(b => b.Id == userDTO.Id).FirstOrDefaultAsync().ConfigureAwait(false);
+            UserEntity? userToEdit = await _context.Users.SingleOrDefaultAsync(b => b.Id == user.Id).ConfigureAwait(false);
 
             if (userToEdit != null)
-                userToEdit = userDTO;
+            {
+                userToEdit.FirstName = user.FirstName;
+                userToEdit.LastName = user.LastName;
+    
+                return await _context.SaveChangesAsync();
+            }
 
-            return _context.SaveChanges();
+            return 0;
         }
 
         public async Task<int> AddUserAsync(User user)

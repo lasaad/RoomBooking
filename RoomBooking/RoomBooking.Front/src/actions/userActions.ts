@@ -13,7 +13,7 @@ type FetchUsersFail = {
     type: "FETCH_USERS_FAIL";
 };
 
-type FetchUser = {
+export type FetchUser = {
     type: "FETCH_USER";
     payload: number
 };

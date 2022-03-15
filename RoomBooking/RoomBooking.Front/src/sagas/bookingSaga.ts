@@ -1,7 +1,7 @@
-import { fetchBookings, postBooking } from "../api/bookingApi";
+import { fetchBookings, postBooking, putBooking, fetchBooking } from "../api/bookingApi";
 import { all, call, put, takeLatest } from "redux-saga/effects";
 import { Booking } from "../domain/Booking";
-import { CreateBooking } from "../actions/bookingActions";
+import { CreateBooking, UpdateBooking, FetchBooking } from "../actions/bookingActions";
 
 export function* getBookings() {
     try {
@@ -17,11 +17,25 @@ export function* getBookings() {
     }
 }
 
+export function* getBooking(action: FetchBooking) {
+    try {
+        const booking: Booking = yield call(fetchBooking, action.payload);
+        yield put({
+            type: "FETCH_BOOKING_SUCCESS",
+            payload: booking
+        });
+    } catch (e) {
+        yield put({
+            type: "FETCH_BOOKING_FAIL"
+        });
+    }
+}
+
 export function* createBooking(action: CreateBooking) {
     try {
         const idBooking: number = yield call(postBooking, action.payload);
         yield put({
-            type: "CREATE_USER_SUCCESS",
+            type: "CREATE_BOOKING_SUCCESS",
             payload: idBooking
         });
     } catch (e) {
@@ -31,9 +45,24 @@ export function* createBooking(action: CreateBooking) {
     }
 }
 
+export function* updateBooking(action: UpdateBooking) {
+    try {
+        yield call(putBooking, action.payload);
+        yield put({
+            type: "UPDATE_BOOKING_SUCCESS"
+        });
+    } catch (e) {
+        yield put({
+            type: "UPDATE_BOOKING_FAIL"
+        });
+    }
+}
+
 export default function* () {
     yield all([
         takeLatest("FETCH_BOOKINGS", getBookings),
-        takeLatest("CREATE_BOOKING", createBooking)
+        takeLatest("FETCH_BOOKING", getBooking),
+        takeLatest("CREATE_BOOKING", createBooking),
+        takeLatest("UPDATE_BOOKING", updateBooking)
     ]);
 }

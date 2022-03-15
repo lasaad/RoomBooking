@@ -13,9 +13,19 @@ type FetchBookingsFail = {
     type: "FETCH_BOOKINGS_FAIL";
 };
 
-export const fetchBookings = (): FetchBookings => ({
-    type: "FETCH_BOOKINGS"
-});
+export type FetchBooking = {
+    type: "FETCH_BOOKING";
+    payload: number
+};
+
+type FetchBookingSuccess = {
+    type: "FETCH_BOOKING_SUCCESS";
+    payload: Booking;
+};
+
+type FetchBookingFail = {
+    type: "FETCH_BOOKING_FAIL";
+};
 
 export type CreateBooking = {
     type: "CREATE_BOOKING";
@@ -31,10 +41,35 @@ type CreateBookingFail = {
     type: "CREATE_BOOKING_FAIL";
 };
 
+type OpenBookingEditor = {
+    type: "OPEN_BOOKING_EDITOR";
+};
+
+export type UpdateBooking = {
+    type: "UPDATE_BOOKING";
+    payload: Booking;
+};
+
+type UpdateBookingSuccess = {
+    type: "UPDATE_BOOKING_SUCCESS";
+    payload: number;
+};
+
+type UpdateBookingFail = {
+    type: "UPDATE_BOOKING_FAIL";
+};
+
 export type BookingAction =
     FetchBookings
     | FetchBookingsSuccess
     | FetchBookingsFail
+    | FetchBooking
+    | FetchBookingSuccess
+    | FetchBookingFail
+    | OpenBookingEditor
     | CreateBooking
     | CreateBookingSuccess
-    | CreateBookingFail;
+    | CreateBookingFail
+    | UpdateBooking
+    | UpdateBookingSuccess
+    | UpdateBookingFail;

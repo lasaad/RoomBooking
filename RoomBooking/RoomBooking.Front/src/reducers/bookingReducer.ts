@@ -5,7 +5,9 @@ import BookingState from "../states/BookingState";
 
 const initialState: BookingState = {
     bookings: [],
-    currentBooking: undefined
+    currentBooking: undefined,
+    isOpen: false,
+    isLoading: false
 };
 
 export const bookingReducer: Reducer<BookingState, BookingAction> = (
@@ -16,16 +18,22 @@ export const bookingReducer: Reducer<BookingState, BookingAction> = (
         case "FETCH_BOOKINGS_SUCCESS":
             return {
                 ...state,
+                isOpen: false,
+                isLoading: false,
                 bookings: action.payload
             };
             case "CREATE_BOOKING":
                 return {
                     ...state,
+                    isOpen: false,
+                    isLoading: false,
                     currentUser: action.payload
                 };
             case "CREATE_BOOKING_SUCCESS":
                 return {
                     ...state,
+                    isOpen: false,
+                    isLoading: false,
                     currentUser: {
                         id: action.payload,
                         date: _.isNil(state.currentBooking) ? "" : state.currentBooking.date,
@@ -35,6 +43,8 @@ export const bookingReducer: Reducer<BookingState, BookingAction> = (
                         userId: _.isNil(state.currentBooking) ? "" : state.currentBooking.userId,
                     }
                 };
+                case "CREATE_BOOKING":
+                case "UPDATE_BOOKING_SUCCESS":
         default:
             return state;
     }

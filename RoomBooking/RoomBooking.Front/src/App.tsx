@@ -17,9 +17,7 @@ function App() {
           |{" "}
           <Link to="/room">Rooms</Link>
           |{" "}
-          <Link to="/bookings">Bookings</Link>
-          |{" "}
-          <Link to="/booking">Create booking</Link> 
+          <Link to="/booking">Bookings</Link> 
         </nav>
         <Outlet />
       </Provider>

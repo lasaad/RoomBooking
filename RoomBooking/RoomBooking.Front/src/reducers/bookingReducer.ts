@@ -22,29 +22,36 @@ export const bookingReducer: Reducer<BookingState, BookingAction> = (
                 isLoading: false,
                 bookings: action.payload
             };
-            case "CREATE_BOOKING":
-                return {
-                    ...state,
-                    isOpen: false,
-                    isLoading: false,
-                    currentUser: action.payload
-                };
-            case "CREATE_BOOKING_SUCCESS":
-                return {
-                    ...state,
-                    isOpen: false,
-                    isLoading: false,
-                    currentUser: {
-                        id: action.payload,
-                        date: _.isNil(state.currentBooking) ? "" : state.currentBooking.date,
-                        startSlot: _.isNil(state.currentBooking) ? "" : state.currentBooking.startSlot,
-                        endSlot: _.isNil(state.currentBooking) ? "" : state.currentBooking.endSlot,
-                        roomId: _.isNil(state.currentBooking) ? "" : state.currentBooking.roomId,
-                        userId: _.isNil(state.currentBooking) ? "" : state.currentBooking.userId,
-                    }
-                };
-                case "CREATE_BOOKING":
-                case "UPDATE_BOOKING_SUCCESS":
+        case "FETCH_BOOKING_SUCCESS":
+            return {
+                ...state,
+                isOpen: true,
+                isLoading: false,
+                currentBooking: action.payload
+            };
+        case "CREATE_BOOKING":
+            return {
+                ...state,
+                isOpen: false,
+                isLoading: false,
+                currentUser: action.payload
+            };
+        case "CREATE_BOOKING_SUCCESS":
+            return {
+                ...state,
+                isOpen: false,
+                isLoading: false,
+                currentUser: {
+                    id: action.payload,
+                    date: _.isNil(state.currentBooking) ? "" : state.currentBooking.date,
+                    startSlot: _.isNil(state.currentBooking) ? "" : state.currentBooking.startSlot,
+                    endSlot: _.isNil(state.currentBooking) ? "" : state.currentBooking.endSlot,
+                    roomId: _.isNil(state.currentBooking) ? "" : state.currentBooking.roomId,
+                    userId: _.isNil(state.currentBooking) ? "" : state.currentBooking.userId,
+                }
+            };
+        case "CREATE_BOOKING":
+        case "UPDATE_BOOKING_SUCCESS":
         default:
             return state;
     }

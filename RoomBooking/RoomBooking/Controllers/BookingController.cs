@@ -38,7 +38,7 @@ namespace RoomBooking.Controllers
         [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(GetBookingsResponse))]
         [SwaggerResponse((int)HttpStatusCode.NotFound, Type = typeof(NotFoundObjectResult))]
         [Route("/Bookings/{id}")]
-        public async Task<IActionResult> GetBooking([FromQuery] int id)
+        public async Task<IActionResult> GetBooking([FromRoute] int id)
         {
             Booking result = await bookingService.GetBookingAsync(id).ConfigureAwait(false);
 

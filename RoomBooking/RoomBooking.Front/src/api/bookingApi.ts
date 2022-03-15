@@ -25,14 +25,14 @@ export const postBooking = async (booking: Booking): Promise<number> => {
 
 export const fetchBooking = async (id: number): Promise<Booking> => {
     const response = await client.get(`/Bookings/${id}`);
-    let result =  response.data.bookings.map((r: Booking) => ({
-        id: r.id,
-        roomId: r.roomId,
-        userId: r.userId,
-        startSlot: r.startSlot,
-        endSlot: r.endSlot,
-        date: r.date
-    }));
+    let result =  {
+        id: response.data.id,
+        roomId: response.data.roomId,
+        userId: response.data.userId,
+        startSlot: response.data.startSlot,
+        endSlot: response.data.endSlot,
+        date: response.data.date
+    };
     return result;
 };
 

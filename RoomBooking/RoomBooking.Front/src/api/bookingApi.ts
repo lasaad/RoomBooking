@@ -45,5 +45,5 @@ export const putBooking = async (booking: Booking): Promise<void> => {
         endSlot: booking.endSlot,
         date: booking.date
     };
-    await client.put(`/Users`, request);
+    await client.put(`/Bookings`, request);
 };

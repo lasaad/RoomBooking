@@ -55,10 +55,16 @@ namespace RoomBooking.Dal.Repository
             Mapper mapper = new(_mapper);
 
             BookingEntity bookingDTO = mapper.Map<BookingEntity>(booking);
-            BookingEntity? bookingToEdit = await _context.Bookings.Where(b => b.Id == bookingDTO.Id).FirstOrDefaultAsync().ConfigureAwait(false);
+            BookingEntity? bookingToEdit = await _context.Bookings.SingleOrDefaultAsync(b => b.Id == bookingDTO.Id).ConfigureAwait(false);
 
             if (bookingToEdit != null)
-                bookingToEdit = bookingDTO;
+            {
+                bookingToEdit.Date = bookingDTO.Date;
+                bookingToEdit.StartSlot = bookingDTO.StartSlot;
+                bookingToEdit.EndSlot = bookingDTO.EndSlot;
+                bookingToEdit.UserId = bookingDTO.UserId;
+                bookingToEdit.RoomId = bookingDTO.RoomId;
+            }
 
             return _context.SaveChanges();
         }

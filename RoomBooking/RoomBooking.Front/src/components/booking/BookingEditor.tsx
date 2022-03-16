@@ -47,18 +47,23 @@ const BookingEditor: React.FC = () => {
 
     return <div style={bookingStyle}>
         <div>
+            <label htmlFor={date}>Date</label>
             <input type="text" value={date} onChange={(e) => setDate(e.target.value)} />
         </div>
         <div>
-            <input type="text" value={startSlot} onChange={(e) => setStartSlot(e.target.value)} />
+            <label>Begin</label>
+            <input type="number" value={startSlot} onChange={(e) => setStartSlot(e.target.value)} />
         </div>
         <div>
-            <input type="text" value={endSlot} onChange={(e) => setEndSlot(e.target.value)} />
+            <label>End</label>
+            <input type="number" value={endSlot} onChange={(e) => setEndSlot(e.target.value)} />
         </div>
         <div>
-            <input type="text" value={roomId} onChange={(e) => setRoomId(e.target.value)} />
+            <label>Room Id</label>
+            <input type="number" value={roomId} onChange={(e) => setRoomId(e.target.value)} />
         </div>
         <div>
+            <label>UserId</label>
             <input type="text" value={userId} onChange={(e) => setUserId(e.target.value)} />
         </div>
         <div>

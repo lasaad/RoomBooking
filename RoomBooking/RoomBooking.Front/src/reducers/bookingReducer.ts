@@ -36,6 +36,12 @@ export const bookingReducer: Reducer<BookingState, BookingAction> = (
                 isLoading: false,
                 currentUser: action.payload
             };
+        case "OPEN_BOOKING_EDITOR":
+                return {
+                    ...state,
+                    currentRoom: undefined,
+                    isOpen: true
+                };
         case "CREATE_BOOKING_SUCCESS":
             return {
                 ...state,

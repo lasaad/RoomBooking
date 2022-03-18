@@ -7,7 +7,8 @@ const initialState: BookingState = {
     bookings: [],
     currentBooking: undefined,
     isOpen: false,
-    isLoading: false
+    isLoading: false,
+    availableHours: undefined
 };
 
 export const bookingReducer: Reducer<BookingState, BookingAction> = (

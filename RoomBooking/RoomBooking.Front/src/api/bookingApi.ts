@@ -1,6 +1,6 @@
-import { setDefaultResultOrder } from "dns/promises";
 import client from ".";
 import { Booking } from "../domain/Booking";
+import { PostBookingResponse } from "./dto/PostBookingResponse";
 import { UpdateBookingRequest } from "./dto/UpdateBookingRequest";
 
 export const fetchBookings = async (): Promise<Booking[]> => {
@@ -16,7 +16,7 @@ export const fetchBookings = async (): Promise<Booking[]> => {
     return a;
 };
 
-export const postBooking = async (booking: Booking): Promise<number> => {
+export const postBooking = async (booking: Booking): Promise<PostBookingResponse> => {
     const response = await client.post("/Bookings", {
         ...booking
     });

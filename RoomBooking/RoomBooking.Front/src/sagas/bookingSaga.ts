@@ -2,6 +2,7 @@ import { fetchBookings, postBooking, putBooking, fetchBooking } from "../api/boo
 import { all, call, put, takeLatest } from "redux-saga/effects";
 import { Booking } from "../domain/Booking";
 import { CreateBooking, UpdateBooking, FetchBooking } from "../actions/bookingActions";
+import { PostBookingResponse } from "../api/dto/PostBookingResponse";
 
 export function* getBookings() {
     try {
@@ -33,11 +34,25 @@ export function* getBooking(action: FetchBooking) {
 
 export function* createBooking(action: CreateBooking) {
     try {
-        const idBooking: number = yield call(postBooking, action.payload);
-        yield put({
-            type: "CREATE_BOOKING_SUCCESS",
-            payload: idBooking
-        });
+        const response: PostBookingResponse = yield call(postBooking, action.payload);
+
+        if(response.isAvailable)
+        {
+            yield put(
+                {
+                type: "CREATE_BOOKING_SUCCESS",
+                payload: response.isAvailable
+            });
+        }
+        else if (!response.isAvailable)
+        {
+            yield put(
+                {
+                type: "UNAVAILABLE_SLOT",
+                payload: response.availableHours
+            });
+        }
+
     } catch (e) {
         yield put({
             type: "CREATE_BOOKING_FAIL"

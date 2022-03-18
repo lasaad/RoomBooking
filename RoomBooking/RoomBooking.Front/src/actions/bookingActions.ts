@@ -41,6 +41,10 @@ type CreateBookingFail = {
     type: "CREATE_BOOKING_FAIL";
 };
 
+type UnavailableSlotBooking = {
+    type: "UNAVAILABLE_SLOT";
+};
+
 type OpenBookingEditor = {
     type: "OPEN_BOOKING_EDITOR";
 };
@@ -72,4 +76,5 @@ export type BookingAction =
     | CreateBookingFail
     | UpdateBooking
     | UpdateBookingSuccess
-    | UpdateBookingFail;
+    | UpdateBookingFail
+    | UnavailableSlotBooking;

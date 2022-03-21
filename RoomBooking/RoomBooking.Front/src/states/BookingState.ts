@@ -5,5 +5,6 @@ export default interface BookingState {
     currentBooking: Booking | undefined;
     isOpen: boolean;
     isLoading: boolean;
+    displayAvailableHours: boolean;
     availableHours: number[] | undefined;
 }

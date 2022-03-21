@@ -8,6 +8,7 @@ const initialState: BookingState = {
     currentBooking: undefined,
     isOpen: false,
     isLoading: false,
+    displayAvailableHours: false,
     availableHours: undefined
 };
 
@@ -38,11 +39,11 @@ export const bookingReducer: Reducer<BookingState, BookingAction> = (
                 currentUser: action.payload
             };
         case "OPEN_BOOKING_EDITOR":
-                return {
-                    ...state,
-                    currentRoom: undefined,
-                    isOpen: true
-                };
+            return {
+                ...state,
+                currentRoom: undefined,
+                isOpen: true
+            };
         case "CREATE_BOOKING_SUCCESS":
             return {
                 ...state,
@@ -56,6 +57,12 @@ export const bookingReducer: Reducer<BookingState, BookingAction> = (
                     roomId: _.isNil(state.currentBooking) ? "" : state.currentBooking.roomId,
                     userId: _.isNil(state.currentBooking) ? "" : state.currentBooking.userId,
                 }
+            };
+        case "UNAVAILABLE_SLOT":
+            return {
+                ...state,
+                displayAvailableHours: true,
+                availableHours: state.availableHours
             };
         case "CREATE_BOOKING":
         case "UPDATE_BOOKING_SUCCESS":

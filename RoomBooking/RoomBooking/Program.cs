@@ -55,11 +55,13 @@ builder.Services.AddCors(options =>
     options.AddPolicy("MyOrigin",
         builder => builder.AllowAnyOrigin()
                           .AllowAnyMethod()
-                          .AllowAnyHeader());
+                          .AllowAnyHeader()
+                          //.AllowCredentials()
+                          );
 });
 
+builder.Services.AddSignalR();
 var app = builder.Build();
-
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -67,6 +69,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
 
 app.UseCors("MyOrigin");
 

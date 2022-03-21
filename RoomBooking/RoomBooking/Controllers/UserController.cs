@@ -1,6 +1,8 @@
 using System.Net;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using RoomBooking.Api.Dtos.Responses;
+using RoomBooking.Api.HubConfig;
 using RoomBooking.Dal.Models;
 using RoomBooking.Domain.Interfaces.Services;
 using RoomBooking.Domain.Models;
@@ -14,11 +16,13 @@ namespace RoomBooking.Controllers
     {
         private readonly IUserService userService;
         private readonly ILogger logger;
+        private readonly IHubContext<UserHub> hub;
 
-        public UserController(IUserService service, ILogger log)
+        public UserController(IUserService service, ILogger log, IHubContext<UserHub> userHub)
         {
             userService = service;
             logger = log;
+            hub = userHub;
         }
 
         [HttpGet]
@@ -26,10 +30,13 @@ namespace RoomBooking.Controllers
         [Route("/Users")]
         public async Task<IActionResult> GetUsers()
         {
+            await hub.Clients.All.SendAsync("transferchartdata");
+
+
             IEnumerable<User> result = await userService.GetUsersAsync().ConfigureAwait(false);
             var r = new GetUsersResponse()
             {
-                Users = result.Select(s => new UserDto { Id = s.Id, FirstName = s.FirstName, LastName = s.LastName})
+                Users = result.Select(s => new UserDto { Id = s.Id, FirstName = s.FirstName, LastName = s.LastName })
             };
             return Ok(r);
         }
@@ -38,7 +45,7 @@ namespace RoomBooking.Controllers
         [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(GetUsersResponse))]
         [SwaggerResponse((int)HttpStatusCode.BadRequest, Type = typeof(BadRequestObjectResult))]
         [Route("/Users/{id}")]
-        public async Task<IActionResult> GetUser([FromRoute]int id)
+        public async Task<IActionResult> GetUser([FromRoute] int id)
         {
             User result = await userService.GetUserAsync(id).ConfigureAwait(false);
 
@@ -84,7 +91,7 @@ namespace RoomBooking.Controllers
                 int result = await userService.EditUserAsync(user).ConfigureAwait(false);
                 if (result == 0)
                 {
-                    logger.Error("Ressource non trouvée {id}", user.Id );
+                    logger.Error("Ressource non trouvée {id}", user.Id);
                     return NotFound(result);
                 }
                 return Ok(result);
